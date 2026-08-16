@@ -1,5 +1,8 @@
-import { ScrollView, Text, View } from "@/lib/tw";
+import { Link, Pressable, ScrollView, Text, View } from "@/lib/tw";
+
+import { Feather } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { colors } from "@/constants/colors";
 
 type ColorSwatchProps = {
   className: string;
@@ -53,6 +56,23 @@ export default function Index() {
           <View className="gap-3">
             <SectionLabel>Brand</SectionLabel>
             <Text className="text-h1 text-burgundy">Sincerely You</Text>
+          </View>
+
+          {/* Screens */}
+          <View className="gap-3">
+            <SectionLabel>Screens</SectionLabel>
+            <Link href="/onboarding" asChild>
+              <Pressable className="flex-row items-center justify-between rounded-2xl bg-burgundy px-6 py-4">
+                <Text className="text-body-lg text-paper-light">
+                  Onboarding
+                </Text>
+                <Feather
+                  name="arrow-right"
+                  size={18}
+                  color={colors.paperLight}
+                />
+              </Pressable>
+            </Link>
           </View>
 
           {/* Colors */}
