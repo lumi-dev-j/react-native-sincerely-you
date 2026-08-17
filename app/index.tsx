@@ -1,189 +1,133 @@
-import { Link, Pressable, ScrollView, Text, View } from "@/lib/tw";
+import { Pressable, ScrollView, Text, View } from "@/lib/tw";
 
+import { BottomNav } from "@/components/BottomNav";
+import { CategoryStoryRow } from "@/components/CategoryStoryRow";
 import { Feather } from "@expo/vector-icons";
+import { FeaturedStoryCard } from "@/components/FeaturedStoryCard";
+import { Image } from "@/lib/tw/image";
+import { PatternHighlightCard } from "@/components/PatternHighlightCard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack } from "expo-router";
+import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
+import { images } from "@/constants/images";
+import { storyCategories } from "@/data/stories";
 
-type ColorSwatchProps = {
-  className: string;
-  name: string;
-  hex: string;
-};
-
-function ColorSwatch({ className, name, hex }: ColorSwatchProps) {
+function SectionTag({ children }: { children: string }) {
   return (
-    <View className="w-24 gap-2">
-      <View
-        className={`h-20 w-24 rounded-xl border border-border ${className}`}
+    <View
+      className="self-start rounded-sm border border-border/70 bg-paper-light px-2.5 py-1"
+      style={styles.tag}
+    >
+      <Text className="text-label text-burgundy" style={{ letterSpacing: 0.6 }}>
+        {children.toUpperCase()}
+      </Text>
+    </View>
+  );
+}
+
+export default function Home() {
+  return (
+    <View className="flex-1 bg-paper">
+      <Stack.Screen options={{ headerShown: false }} />
+      {/* Very subtle paper-grain texture over the flat screen background.
+          The grain's own alpha channel is already faint (~8% max), so no
+          extra opacity is layered on top. */}
+      <Image
+        source={images.paperGrain}
+        className="absolute h-full w-full object-cover"
+        pointerEvents="none"
       />
-      <View>
-        <Text className="text-body-sm text-ink">{name}</Text>
-        <Text className="text-caption text-ink-muted">{hex}</Text>
-      </View>
-    </View>
-  );
-}
-
-type TypeRowProps = {
-  className: string;
-  label: string;
-  usage: string;
-};
-
-function TypeRow({ className, label, usage }: TypeRowProps) {
-  return (
-    <View className="gap-1 border-b border-border py-4">
-      <Text className={`${className} text-ink`}>{label}</Text>
-      <Text className="text-caption text-ink-muted">{usage}</Text>
-    </View>
-  );
-}
-
-function SectionLabel({ children }: { children: string }) {
-  return (
-    <Text className="text-body-sm text-burgundy" style={{ letterSpacing: 1 }}>
-      {children.toUpperCase()}
-    </Text>
-  );
-}
-
-export default function Index() {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#FAF6EF" }}>
-      <ScrollView className="flex-1 bg-paper-light">
-        <View className="gap-10 px-6 pb-16 pt-6">
-          {/* Brand */}
-          <View className="gap-3">
-            <SectionLabel>Brand</SectionLabel>
-            <Text className="text-h1 text-burgundy">Sincerely You</Text>
-          </View>
-
-          {/* Screens */}
-          <View className="gap-3">
-            <SectionLabel>Screens</SectionLabel>
-            <Link href="/onboarding" asChild>
-              <Pressable className="flex-row items-center justify-between rounded-2xl bg-burgundy px-6 py-4">
-                <Text className="text-body-lg text-paper-light">
-                  Onboarding
-                </Text>
-                <Feather
-                  name="arrow-right"
-                  size={18}
-                  color={colors.paperLight}
-                />
-              </Pressable>
-            </Link>
-          </View>
-
-          {/* Colors */}
-          <View className="gap-6">
-            <SectionLabel>Colors</SectionLabel>
-
-            <View className="gap-3">
-              <Text className="text-caption text-ink-muted">PRIMARY</Text>
-              <View className="flex-row gap-4">
-                <ColorSwatch
-                  className="bg-burgundy"
-                  name="Burgundy"
-                  hex="#7D3540"
-                />
-                <ColorSwatch
-                  className="bg-burgundy-dark"
-                  name="Burgundy Dark"
-                  hex="#59252D"
-                />
-                <ColorSwatch
-                  className="bg-rose-dust"
-                  name="Rose Dust"
-                  hex="#C79A9B"
-                />
-              </View>
-            </View>
-
-            <View className="gap-3">
-              <Text className="text-caption text-ink-muted">NEUTRALS</Text>
-              <View className="flex-row flex-wrap gap-4">
-                <ColorSwatch className="bg-ink" name="Ink" hex="#24201E" />
-                <ColorSwatch
-                  className="bg-ink-muted"
-                  name="Ink Muted"
-                  hex="#6F6862"
-                />
-                <ColorSwatch className="bg-paper" name="Paper" hex="#F4EDE2" />
-                <ColorSwatch
-                  className="bg-paper-light"
-                  name="Paper Light"
-                  hex="#FAF6EF"
-                />
-                <ColorSwatch
-                  className="bg-border"
-                  name="Border"
-                  hex="#DDD3C7"
-                />
-              </View>
-            </View>
-
-            <View className="gap-3">
-              <Text className="text-caption text-ink-muted">
-                ACCENT (CATEGORY)
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Header */}
+          <View className="flex-row items-start justify-between px-5 pt-3">
+            <View className="gap-1">
+              <Text className="text-h1 text-ink">Welcome back.</Text>
+              <Text className="text-body-md text-ink-muted">
+                Your story is waiting.
               </Text>
-              <View className="flex-row gap-4">
-                <ColorSwatch className="bg-sage" name="Sage" hex="#858574" />
-                <ColorSwatch
-                  className="bg-slate"
-                  name="Slate"
-                  hex="#817C82"
+            </View>
+            <Pressable
+              className="h-10 w-10 items-center justify-center rounded-full bg-paper-light"
+              style={styles.settingsShadow}
+              hitSlop={8}
+            >
+              <Feather name="settings" size={18} color={colors.ink} />
+            </Pressable>
+          </View>
+
+          {/* Featured story */}
+          <View className="px-5 pt-3">
+            <FeaturedStoryCard
+              storyNumber={1}
+              category="Dating"
+              title="Something feels off."
+              episode={4}
+              durationMinutes={6}
+              sceneImage={images.storyDating01Scene}
+            />
+          </View>
+
+          {/* Your stories */}
+          <View className="gap-2 px-5 pt-5">
+            <SectionTag>Your stories</SectionTag>
+            <View className="gap-2">
+              {storyCategories.map((category) => (
+                <CategoryStoryRow
+                  key={category.id}
+                  title={category.title}
+                  icon={category.icon}
+                  accentClass={category.accentClass}
+                  status={category.status}
                 />
-              </View>
+              ))}
             </View>
           </View>
 
-          {/* Typography */}
-          <View className="gap-1">
-            <SectionLabel>Typography</SectionLabel>
-            <TypeRow
-              className="text-h1"
-              label="H1"
-              usage="Page / Screen Title · 36/40 · Regular · DM Serif Display"
-            />
-            <TypeRow
-              className="text-h2"
-              label="H2"
-              usage="Section Title · 28/34 · Regular · DM Serif Display"
-            />
-            <TypeRow
-              className="text-h3"
-              label="H3"
-              usage="Card / Module Title · 22/28 · Regular · DM Serif Display"
-            />
-            <TypeRow
-              className="text-h4"
-              label="H4"
-              usage="Subheading · 18/24 · Medium · Inter"
-            />
-            <TypeRow
-              className="text-body-lg"
-              label="Body Large"
-              usage="Important content · 17/25 · Regular · Inter"
-            />
-            <TypeRow
-              className="text-body-md"
-              label="Body Medium"
-              usage="Body text · 15/22 · Regular · Inter"
-            />
-            <TypeRow
-              className="text-body-sm"
-              label="Body Small"
-              usage="Supporting text · 13/19 · Regular · Inter"
-            />
-            <TypeRow
-              className="text-caption"
-              label="Caption"
-              usage="Labels, meta text · 11/16 · Regular · Inter"
-            />
+          {/* Recently discovered */}
+          <View className="gap-2 pt-5">
+            <View className="px-5">
+              <SectionTag>Recently discovered</SectionTag>
+            </View>
+            <View>
+              <PatternHighlightCard
+                title="Guilt-Tripping"
+                description="When someone shifts the focus from your boundary to whether you care about them."
+              />
+            </View>
           </View>
+        </ScrollView>
+
+        <View className="px-5 pt-1.5">
+          <BottomNav activeTab="home" />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollContent: {
+    paddingBottom: 12,
+  },
+  settingsShadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  tag: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.03,
+    shadowRadius: 1,
+    elevation: 1,
+    transform: [{ rotate: "-1deg" }],
+  },
+});

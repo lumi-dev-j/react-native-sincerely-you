@@ -21,8 +21,10 @@
     --color-sage: #858574;
     --color-slate: #817c82;
 
-    /* Typography — DM Serif Display for editorial headings, Inter for UI */
-    --font-serif: "DMSerifDisplay_400Regular";
+    /* Typography — Playfair Display for editorial headings, Inter for UI.
+       All serif headings use the Regular cut, kept light and refined
+       instead of reading as a bold display face. */
+    --font-serif: "PlayfairDisplay_400Regular";
     --font-sans: "Inter_400Regular";
     --font-sans-medium: "Inter_500Medium";
   }
@@ -32,20 +34,28 @@
    family, size and line-height so components don't have to recompose it */
 @utility text-h1 {
   font-family: var(--font-serif);
-  font-size: 36px;
-  line-height: 40px;
+  font-size: 27px;
+  line-height: 30px;
 }
 
 @utility text-h2 {
   font-family: var(--font-serif);
-  font-size: 28px;
-  line-height: 34px;
+  font-size: 23px;
+  line-height: 26px;
 }
 
 @utility text-h3 {
   font-family: var(--font-serif);
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 19px;
+  line-height: 22px;
+}
+
+/* Smallest serif heading — compact card/row titles (e.g. story category
+   rows, pattern cards) that still want the editorial serif, just tighter. */
+@utility text-h5 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 20px;
 }
 
 @utility text-h4 {
@@ -68,8 +78,8 @@
 
 @utility text-body-sm {
   font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 19px;
+  font-size: 11px;
+  line-height: 16px;
 }
 
 @utility text-caption {
@@ -82,4 +92,21 @@
   font-family: var(--font-sans-medium);
   font-size: 17px;
   line-height: 25px;
+}
+
+/* Uppercase, tracked micro-labels — section tags, status pills, eyebrow
+   captions. Medium weight so they hold up at a small size next to the
+   regular-weight body text. */
+@utility text-label {
+  font-family: var(--font-sans-medium);
+  font-size: 11px;
+  line-height: 15px;
+}
+
+/* Inline text links inside cards (e.g. "Continue story"), distinct from
+   text-button's full-width tap targets — same medium weight, smaller size. */
+@utility text-link {
+  font-family: var(--font-sans-medium);
+  font-size: 14px;
+  line-height: 19px;
 }
