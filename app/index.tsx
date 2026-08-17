@@ -94,7 +94,7 @@ export default function Home() {
             <View className="px-5">
               <SectionTag>Recently discovered</SectionTag>
             </View>
-            <View>
+            <View className="px-5">
               <PatternHighlightCard
                 title="Guilt-Tripping"
                 description="When someone shifts the focus from your boundary to whether you care about them."

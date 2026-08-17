@@ -26,10 +26,8 @@ export function PatternHighlightCard({
   onPress,
 }: PatternHighlightCardProps) {
   return (
-    // Rendered narrower than the page's content width (rather than cropping
-    // the fixed-ratio card art) so it reads smaller/denser without
-    // distorting or cutting into the paper, tape, or leaf print.
-    <View className="w-[85%] self-center" style={{ aspectRatio: CARD_RATIO }}>
+    // Full content width, matching the "Your Stories" rows.
+    <View className="w-full" style={{ aspectRatio: CARD_RATIO }}>
       {/* Scene slot sits behind the card art and shows through the polaroid opening */}
       <View className="absolute left-[5%] top-[18.6%] h-[59.1%] w-[25.8%] overflow-hidden rounded-sm bg-paper">
         {sceneImage ? (
@@ -48,7 +46,7 @@ export function PatternHighlightCard({
           overflow trims from the bottom rather than slicing through a line.
           shrink-0 on every child stops the web flexbox default (shrink: 1)
           from squeezing text below its natural size. */}
-      <View className="absolute left-[36%] right-[8%] top-[8%] bottom-[4%] gap-1 overflow-hidden">
+      <View className="absolute left-[36%] right-[8%] top-[8%] bottom-[4%] gap-2 overflow-hidden">
         <Text className="shrink-0 text-h3 text-ink" numberOfLines={1}>
           {title}
         </Text>
