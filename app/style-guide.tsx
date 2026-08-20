@@ -73,6 +73,24 @@ export default function Index() {
                 />
               </Pressable>
             </Link>
+            <Link
+              href={{
+                pathname: "/story/[episodeId]",
+                params: { episodeId: "too-good-to-be-true" },
+              }}
+              asChild
+            >
+              <Pressable className="flex-row items-center justify-between rounded-2xl bg-burgundy px-6 py-4">
+                <Text className="text-body-lg text-paper-light">
+                  Episode Context
+                </Text>
+                <Feather
+                  name="arrow-right"
+                  size={18}
+                  color={colors.paperLight}
+                />
+              </Pressable>
+            </Link>
           </View>
 
           {/* Colors */}
