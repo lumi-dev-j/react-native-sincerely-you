@@ -18,9 +18,7 @@ export default function EpisodeVideo() {
       <EpisodeVideoScreen
         episode={episode}
         onBack={() => router.back()}
-        onSeeWhatYouLearned={() => {
-          // Pattern reveal screen isn't built yet — wire this up once that screen exists.
-        }}
+        onSeeWhatYouLearned={() => router.push(`/story/${episodeId}/patterns`)}
       />
     </>
   );
