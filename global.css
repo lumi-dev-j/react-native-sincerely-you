@@ -25,6 +25,7 @@
        All serif headings use the Regular cut, kept light and refined
        instead of reading as a bold display face. */
     --font-serif: "PlayfairDisplay_400Regular";
+    --font-serif-italic: "PlayfairDisplay_400Regular_Italic";
     --font-sans: "Inter_400Regular";
     --font-sans-medium: "Inter_500Medium";
   }
@@ -32,6 +33,14 @@
 
 /* Type scale from the design system — each utility bundles the exact
    family, size and line-height so components don't have to recompose it */
+/* Largest editorial heading — reserved for full-bleed moments like the
+   episode context screen title, bigger than a page's regular H1. */
+@utility text-display {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  line-height: 40px;
+}
+
 @utility text-h1 {
   font-family: var(--font-serif);
   font-size: 27px;
@@ -109,4 +118,13 @@
   font-family: var(--font-sans-medium);
   font-size: 14px;
   line-height: 19px;
+}
+
+/* Cursive brand wordmark ("Sincerely, You") — the italic cut of the same
+   serif family used for headings, so it stays on-brand without pulling in
+   a dedicated script font. */
+@utility text-wordmark {
+  font-family: var(--font-serif-italic);
+  font-size: 19px;
+  line-height: 24px;
 }
