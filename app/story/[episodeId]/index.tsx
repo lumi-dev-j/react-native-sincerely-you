@@ -18,9 +18,7 @@ export default function EpisodeContext() {
       <EpisodeContextScreen
         episode={episode}
         onBack={() => router.back()}
-        onBeginStory={() => {
-          // Story playback isn't built yet — wire this up once that screen exists.
-        }}
+        onBeginStory={() => router.push(`/story/${episodeId}/video`)}
       />
     </>
   );

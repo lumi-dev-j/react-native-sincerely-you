@@ -1,4 +1,5 @@
 import type { ImageSourcePropType } from "react-native";
+import type { VideoSource } from "expo-video";
 
 import { images } from "@/constants/images";
 
@@ -9,6 +10,7 @@ export type Episode = {
   /** Rendered as-is, so a literal "\n" controls the line break. */
   title: string;
   coverImage: ImageSourcePropType;
+  video: VideoSource;
   /** First context line, with a bolded lead-in (usually the character names). */
   contextIntro: { emphasis: string; rest: string };
   /** Second context line, shown below the divider. */
@@ -22,6 +24,9 @@ export const episodes: Record<string, Episode> = {
     episodeNumber: 1,
     title: "Too Good\nto Be True",
     coverImage: images.episode1Scene,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-1.mp4",
+    },
     contextIntro: {
       emphasis: "Jimmy and Taylor",
       rest: " have only been\non a few dates.",
