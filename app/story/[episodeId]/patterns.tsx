@@ -18,9 +18,7 @@ export default function EpisodePatterns() {
       <PatternRevealScreen
         reveal={reveal}
         onBack={() => router.back()}
-        onContinue={() => {
-          // Next part of the story isn't built yet — wire this up once that screen exists.
-        }}
+        onContinue={() => router.push(`/story/${episodeId}/complete`)}
       />
     </>
   );

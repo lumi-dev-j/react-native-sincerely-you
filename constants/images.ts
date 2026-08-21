@@ -1,4 +1,5 @@
 import bottomCard from "@/assets/images/bottom-card.png";
+import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
 import contextBackground from "@/assets/images/context-background.png";
 import episode1Scene from "@/assets/images/episode-1-scene.png";
 import noteClip from "@/assets/images/note-clip.png";
@@ -28,4 +29,5 @@ export const images = {
   videoPageNoteClip,
   tutorialPageBackground,
   pinkReminder,
+  completeEpisodeBackground,
 };
