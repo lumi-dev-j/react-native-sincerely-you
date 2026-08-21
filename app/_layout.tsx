@@ -5,6 +5,7 @@ import { Inter_400Regular, Inter_500Medium } from "@expo-google-fonts/inter";
 import {
   PlayfairDisplay_400Regular,
   PlayfairDisplay_400Regular_Italic,
+  PlayfairDisplay_700Bold,
 } from "@expo-google-fonts/playfair-display";
 
 import { Stack } from "expo-router";
@@ -17,6 +18,7 @@ export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     PlayfairDisplay_400Regular,
     PlayfairDisplay_400Regular_Italic,
+    PlayfairDisplay_700Bold,
     Inter_400Regular,
     Inter_500Medium,
   });

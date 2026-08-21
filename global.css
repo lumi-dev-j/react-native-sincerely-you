@@ -26,6 +26,7 @@
        instead of reading as a bold display face. */
     --font-serif: "PlayfairDisplay_400Regular";
     --font-serif-italic: "PlayfairDisplay_400Regular_Italic";
+    --font-serif-bold: "PlayfairDisplay_700Bold";
     --font-sans: "Inter_400Regular";
     --font-sans-medium: "Inter_500Medium";
   }
@@ -43,6 +44,14 @@
 
 @utility text-h1 {
   font-family: var(--font-serif);
+  font-size: 27px;
+  line-height: 30px;
+}
+
+/* Bold cut of text-h1 — for hero moments like the episode-complete title
+   that call for a heavier serif than the design system's usual light cut. */
+@utility text-h1-bold {
+  font-family: var(--font-serif-bold);
   font-size: 27px;
   line-height: 30px;
 }
