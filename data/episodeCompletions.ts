@@ -2,8 +2,6 @@ import type { ImageSourcePropType } from "react-native";
 
 export type EpisodeCompletion = {
   nextEpisode: {
-    /** Route id for the next episode; undefined if it isn't built yet. */
-    episodeId?: string;
     episodeNumber: number;
     /** Rendered as-is, so a literal "\n" controls the line break. */
     titleLine: string;

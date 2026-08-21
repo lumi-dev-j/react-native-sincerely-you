@@ -15,7 +15,7 @@ type EpisodeCompleteScreenProps = {
   nextEpisode: EpisodeCompletion["nextEpisode"];
   onBack?: () => void;
   onContinue?: () => void;
-  onBackToJourney?: () => void;
+  onBackToHome?: () => void;
 };
 
 export function EpisodeCompleteScreen({
@@ -24,7 +24,7 @@ export function EpisodeCompleteScreen({
   nextEpisode,
   onBack,
   onContinue,
-  onBackToJourney,
+  onBackToHome,
 }: EpisodeCompleteScreenProps) {
   return (
     <View className="flex-1 bg-paper">
@@ -150,15 +150,15 @@ export function EpisodeCompleteScreen({
               </Pressable>
             </View>
 
-            {/* Back to journey */}
+            {/* Back to home */}
             <Pressable
               className="flex-row items-center justify-center gap-2 pt-6"
-              onPress={onBackToJourney}
+              onPress={onBackToHome}
               hitSlop={8}
             >
               <Feather name="book-open" size={15} color={colors.burgundy} />
               <Text className="text-link text-burgundy underline">
-                Back to Journey
+                Back to Home
               </Text>
             </Pressable>
           </ScrollView>

@@ -7,7 +7,7 @@ import { FeaturedStoryCard } from "@/components/FeaturedStoryCard";
 import { Image } from "@/lib/tw/image";
 import { PatternHighlightCard } from "@/components/PatternHighlightCard";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
@@ -70,6 +70,7 @@ export default function Home() {
               episode={4}
               durationMinutes={6}
               sceneImage={images.storyDating01Scene}
+              onContinue={() => router.push("/story/too-good-to-be-true")}
             />
           </View>
 
