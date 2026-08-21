@@ -2,6 +2,7 @@ import type { ImageSourcePropType } from "react-native";
 import type { VideoSource } from "expo-video";
 
 import { images } from "@/constants/images";
+import { patternReveals } from "@/data/patterns";
 
 export type Episode = {
   id: string;
@@ -15,6 +16,10 @@ export type Episode = {
   contextIntro: { emphasis: string; rest: string };
   /** Second context line, shown below the divider. */
   contextHook: string;
+  /** Pattern titles surfaced on the episode-complete screen, sourced from this episode's patternReveals entry. */
+  discoveredPatterns: string[];
+  /** Id of the episode to continue into. Undefined once the story ends. */
+  nextEpisodeId?: string;
 };
 
 export const episodes: Record<string, Episode> = {
@@ -33,5 +38,9 @@ export const episodes: Record<string, Episode> = {
     },
     contextHook:
       "But somehow, it already feels like\nthey've known each other forever.",
+    discoveredPatterns: patternReveals["too-good-to-be-true"].patterns.map(
+      (pattern) => pattern.title
+    ),
+    nextEpisodeId: "friday-night",
   },
 };

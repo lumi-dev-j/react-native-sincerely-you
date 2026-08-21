@@ -1,13 +1,15 @@
 import { Pressable, Text, View } from "@/lib/tw";
+import { InteractionManager, StyleSheet } from "react-native";
+import { useCallback, useRef } from "react";
 import { useVideoPlayer, VideoView } from "expo-video";
 
 import type { Episode } from "@/data/episodes";
 import { Feather } from "@expo/vector-icons";
 import { Image } from "@/lib/tw/image";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
+import { useFocusEffect } from "@react-navigation/native";
 
 // Native aspect ratio of the visible white card (border + opening) inside
 // assets/images/video-page-white-frame.png. The PNG canvas is larger than
@@ -50,7 +52,43 @@ export function EpisodeVideoScreen({
   onBack,
   onSeeWhatYouLearned,
 }: EpisodeVideoScreenProps) {
-  const player = useVideoPlayer(episode.video);
+  const player = useVideoPlayer(episode.video, (player) => {
+    player.play();
+  });
+  const videoRef = useRef<VideoView>(null);
+  const hasAutoFullscreened = useRef(false);
+
+  // Pushing another screen on top (e.g. "See what you learned") doesn't
+  // unmount this one — Stack keeps it alive underneath for the back
+  // transition — so without this the player just keeps playing in the
+  // background. Blur fires for that case and for a real back-navigation
+  // alike, so this is the one place that needs to stop it.
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        try {
+          player.pause();
+        } catch {
+          // On a real back-navigation this screen unmounts, and
+          // useVideoPlayer's own teardown can release the native player
+          // before this cleanup runs — pausing an already-released
+          // player throws, so it's safe to ignore here.
+        }
+      };
+    }, [player])
+  );
+
+  // Presenting the native fullscreen player while the Context → Video push
+  // transition is still animating corrupts the native navigation stack
+  // (back stops working afterwards), so this waits for that transition —
+  // and any other pending interaction — to finish first.
+  const enterFullscreenOnce = () => {
+    if (hasAutoFullscreened.current) return;
+    hasAutoFullscreened.current = true;
+    InteractionManager.runAfterInteractions(() => {
+      videoRef.current?.enterFullscreen().catch(() => {});
+    });
+  };
 
   return (
     <View className="flex-1 bg-paper">
@@ -74,7 +112,9 @@ export function EpisodeVideoScreen({
           {/* Eyebrow + title */}
           <View className="items-center gap-3 pt-6">
             <View className="flex-row items-center gap-2">
-              <EpisodeIcon />
+              <View className="h-5 w-5 items-center justify-center rounded-md border border-burgundy">
+                <Feather name="heart" size={10} color={colors.burgundy} />
+              </View>
               <Text
                 className="text-label text-burgundy"
                 style={{ letterSpacing: 1 }}
@@ -105,10 +145,12 @@ export function EpisodeVideoScreen({
               <View className="absolute" style={FRAME_BOX}>
                 <View className="absolute overflow-hidden bg-ink" style={VIDEO_OPENING}>
                   <VideoView
+                    ref={videoRef}
                     player={player}
                     style={{ flex: 1 }}
                     nativeControls
                     contentFit="cover"
+                    onFirstFrameRender={enterFullscreenOnce}
                   />
                 </View>
                 <Image
@@ -136,47 +178,6 @@ export function EpisodeVideoScreen({
     </View>
   );
 }
-
-// Small hand-drawn-style "episode" glyph — a rounded card with a crossed
-// corner fold and a caption line, built from plain Views to match the
-// reference icon without pulling in a new icon asset or SVG dependency.
-function EpisodeIcon() {
-  return (
-    <View style={iconStyles.box}>
-      <View style={[iconStyles.cross, { transform: [{ rotate: "45deg" }] }]} />
-      <View style={[iconStyles.cross, { transform: [{ rotate: "-45deg" }] }]} />
-      <View style={iconStyles.underline} />
-    </View>
-  );
-}
-
-const iconStyles = StyleSheet.create({
-  box: {
-    width: 16,
-    height: 20,
-    borderRadius: 3,
-    borderWidth: 1.4,
-    borderColor: colors.burgundy,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cross: {
-    position: "absolute",
-    top: 6,
-    width: 9,
-    height: 1.3,
-    borderRadius: 1,
-    backgroundColor: colors.burgundy,
-  },
-  underline: {
-    position: "absolute",
-    bottom: 3.5,
-    width: 7,
-    height: 1.3,
-    borderRadius: 1,
-    backgroundColor: colors.burgundy,
-  },
-});
 
 const styles = StyleSheet.create({
   shadow: {
