@@ -4,13 +4,11 @@ import { Feather } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
 
-type NavTabKey = "home" | "stories" | "patterns" | "you";
+type NavTabKey = "home" | "patterns";
 
 const TABS: { key: NavTabKey; label: string; icon: React.ComponentProps<typeof Feather>["name"] }[] = [
   { key: "home", label: "Home", icon: "home" },
-  { key: "stories", label: "Stories", icon: "book-open" },
   { key: "patterns", label: "Patterns", icon: "compass" },
-  { key: "you", label: "You", icon: "user" },
 ];
 
 type BottomNavProps = {

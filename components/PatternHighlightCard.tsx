@@ -21,7 +21,7 @@ type PatternHighlightCardProps = {
 export function PatternHighlightCard({
   title,
   description,
-  ctaLabel = "Open case note",
+  ctaLabel = "Explore pattern",
   sceneImage,
   onPress,
 }: PatternHighlightCardProps) {
