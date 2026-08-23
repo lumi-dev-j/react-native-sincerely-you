@@ -17,7 +17,7 @@ export default function EpisodeContext() {
       <Stack.Screen options={{ headerShown: false }} />
       <EpisodeContextScreen
         episode={episode}
-        onBack={() => router.back()}
+        onBack={() => (router.canGoBack() ? router.back() : router.replace("/"))}
         onBeginStory={() => router.push(`/story/${episodeId}/video`)}
       />
     </>

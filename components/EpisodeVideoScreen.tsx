@@ -2,6 +2,7 @@ import { Pressable, Text, View } from "@/lib/tw";
 import { InteractionManager, StyleSheet } from "react-native";
 import { useCallback, useRef } from "react";
 import { useVideoPlayer, VideoView } from "expo-video";
+import type { VideoSource } from "expo-video";
 
 import type { Episode } from "@/data/episodes";
 import { Feather } from "@expo/vector-icons";
@@ -43,16 +44,22 @@ const VIDEO_OPENING = {
 
 type EpisodeVideoScreenProps = {
   episode: Episode;
+  /** Video to play — defaults to the episode's main video (e.g. a response video instead). */
+  video?: VideoSource;
+  /** CTA button label, e.g. "See what you learned" or "What would you say?" */
+  ctaLabel: string;
   onBack?: () => void;
-  onSeeWhatYouLearned?: () => void;
+  onCtaPress?: () => void;
 };
 
 export function EpisodeVideoScreen({
   episode,
+  video,
+  ctaLabel,
   onBack,
-  onSeeWhatYouLearned,
+  onCtaPress,
 }: EpisodeVideoScreenProps) {
-  const player = useVideoPlayer(episode.video, (player) => {
+  const player = useVideoPlayer(video ?? episode.video, (player) => {
     player.play();
   });
   const videoRef = useRef<VideoView>(null);
@@ -167,9 +174,9 @@ export function EpisodeVideoScreen({
             <Pressable
               className="flex-row items-center justify-center gap-3 rounded-2xl bg-burgundy-dark px-6 py-5"
               style={styles.buttonShadow}
-              onPress={onSeeWhatYouLearned}
+              onPress={onCtaPress}
             >
-              <Text className="text-button text-paper-light">See what you learned</Text>
+              <Text className="text-button text-paper-light">{ctaLabel}</Text>
               <Feather name="arrow-right" size={18} color={colors.paperLight} />
             </Pressable>
           </View>
