@@ -19,4 +19,11 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
       description: "Maya meets your\nclosest friends.",
     },
   },
+  "friday-night": {
+    nextEpisode: {
+      episodeNumber: 3,
+      titleLine: "The Little Things",
+      description: "Small comments start to\nmake Jimmy second-guess himself.",
+    },
+  },
 };

@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "@/lib/tw";
+import { Pressable, ScrollView, Text, View } from "@/lib/tw";
 
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Fragment, useState } from "react";
@@ -23,12 +23,15 @@ const CARD_INSET = {
 
 type PatternRevealScreenProps = {
   reveal: PatternReveal;
+  /** The response the user picked, if this episode has a decision beat — its exact text plus the matching reflection. */
+  yourResponse?: { text: string; reflection: string };
   onBack?: () => void;
   onContinue?: () => void;
 };
 
 export function PatternRevealScreen({
   reveal,
+  yourResponse,
   onBack,
   onContinue,
 }: PatternRevealScreenProps) {
@@ -64,7 +67,11 @@ export function PatternRevealScreen({
           bottom: CARD_INSET.bottom,
         }}
       >
-        <View className="flex-1 px-5 pb-5 pt-4">
+        <ScrollView
+          className="flex-1"
+          contentContainerClassName="px-5 pb-5 pt-4"
+          showsVerticalScrollIndicator={false}
+        >
           {reveal.patterns.map((pattern) => (
             <Fragment key={pattern.title}>
               <PatternRow
@@ -76,6 +83,18 @@ export function PatternRevealScreen({
               <Divider />
             </Fragment>
           ))}
+
+          {yourResponse && (
+            <>
+              <PatternRow
+                label="Your Response"
+                title={`“${yourResponse.text}”`}
+                description={yourResponse.reflection}
+                icon={{ set: "feather", name: "user" }}
+              />
+              <Divider />
+            </>
+          )}
 
           <View className="flex-row gap-3">
             <IconCircle icon={reveal.watchFor.icon} />
@@ -112,7 +131,7 @@ export function PatternRevealScreen({
             </Text>
             <Feather name="arrow-right" size={16} color={colors.paperLight} />
           </Pressable>
-        </View>
+        </ScrollView>
       </View>
     </View>
   );

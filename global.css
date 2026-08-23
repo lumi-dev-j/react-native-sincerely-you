@@ -137,3 +137,11 @@
   font-size: 19px;
   line-height: 24px;
 }
+
+/* Small italic serif prompt — editorial flourish above a set of choices,
+   e.g. "Choose what Jimmy says next." on the response-selection screen. */
+@utility text-hint {
+  font-family: var(--font-serif-italic);
+  font-size: 15px;
+  line-height: 21px;
+}

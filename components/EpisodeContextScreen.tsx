@@ -40,6 +40,22 @@ const PHOTO_OPENING = {
   rotate: "-3.07deg",
 } as const;
 
+// Renders text with a single substring (e.g. a character's name) bolded to
+// match the contextIntro emphasis styling, falling back to plain text when
+// no emphasis is given or the substring isn't found.
+function renderWithEmphasis(text: string, emphasis?: string) {
+  const index = emphasis ? text.indexOf(emphasis) : -1;
+  if (index === -1) return text;
+
+  return (
+    <>
+      {text.slice(0, index)}
+      <Text className="font-sans-medium text-ink">{emphasis}</Text>
+      {text.slice(index + emphasis!.length)}
+    </>
+  );
+}
+
 type EpisodeContextScreenProps = {
   episode: Episode;
   onBack?: () => void;
@@ -144,7 +160,7 @@ export function EpisodeContextScreen({
             </View>
 
             <Text className="text-center text-body-lg text-ink-muted">
-              {episode.contextHook}
+              {renderWithEmphasis(episode.contextHook, episode.contextHookEmphasis)}
             </Text>
           </View>
 

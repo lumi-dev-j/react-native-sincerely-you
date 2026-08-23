@@ -21,7 +21,11 @@ export default function EpisodeComplete() {
         episode={episode}
         patternsDiscovered={episode.discoveredPatterns}
         nextEpisode={completion.nextEpisode}
-        onBack={() => router.back()}
+        onBack={() =>
+          router.canGoBack()
+            ? router.back()
+            : router.replace(`/story/${episodeId}/patterns`)
+        }
         onContinue={() => {
           if (episode.nextEpisodeId) {
             router.push(`/story/${episode.nextEpisodeId}`);
