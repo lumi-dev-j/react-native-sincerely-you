@@ -5,10 +5,15 @@ import { StyleSheet } from "react-native";
 import type { StoryCategory } from "@/data/stories";
 import { colors } from "@/constants/colors";
 
+type CategoryStoryRowStatus =
+  | { kind: "in-progress"; completed: number; total: number }
+  | { kind: "coming-soon" };
+
 type CategoryStoryRowProps = Pick<
   StoryCategory,
-  "title" | "icon" | "accentClass" | "status"
+  "title" | "icon" | "accentClass"
 > & {
+  status: CategoryStoryRowStatus;
   onPress?: () => void;
 };
 

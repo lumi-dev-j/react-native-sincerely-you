@@ -11,10 +11,9 @@ import { images } from "@/constants/images";
 const CARD_RATIO = 1536 / 1024;
 
 type FeaturedStoryCardProps = {
-  storyNumber: number;
   category: string;
-  title: string;
-  episode: number;
+  episodeNumber: number;
+  episodeTitle: string;
   durationMinutes: number;
   /** Scene image for the die-cut photo opening. Leave unset for a blank slot. */
   sceneImage?: ImageSourcePropType;
@@ -22,10 +21,9 @@ type FeaturedStoryCardProps = {
 };
 
 export function FeaturedStoryCard({
-  storyNumber,
   category,
-  title,
-  episode,
+  episodeNumber,
+  episodeTitle,
   durationMinutes,
   sceneImage,
   onContinue,
@@ -56,26 +54,26 @@ export function FeaturedStoryCard({
           overflow trims from the bottom rather than slicing through a line.
           shrink-0 on every child stops the web flexbox default (shrink: 1)
           from squeezing text below its natural size. */}
-      <View className="absolute left-[11%] right-[26%] top-[49%] bottom-[4%] gap-1.5 overflow-hidden">
+      <View className="absolute left-[11%] right-[26%] top-[47%] bottom-[1%] gap-1 overflow-hidden">
         <Text
           className="shrink-0 text-label text-burgundy"
           style={{ letterSpacing: 0.8 }}
         >
-          STORY {String(storyNumber).padStart(2, "0")} · {category.toUpperCase()}
+          {category.toUpperCase()} · CURRENT EPISODE
         </Text>
-        <Text className="shrink-0 text-h2 text-ink" numberOfLines={1}>
-          {title}
+        <Text className="shrink-0 text-h3 text-ink" numberOfLines={2}>
+          Episode {String(episodeNumber).padStart(2, "0")} — {episodeTitle}
         </Text>
         <Text className="shrink-0 text-body-sm text-ink-muted">
-          Episode {String(episode).padStart(2, "0")} · {durationMinutes} min
+          {durationMinutes} min
         </Text>
-        <View className="my-1 h-0.5 w-6 shrink-0 rounded-full bg-burgundy/70" />
+        <View className="my-0.5 h-0.5 w-6 shrink-0 rounded-full bg-burgundy/70" />
         <Pressable
           className="shrink-0 flex-row items-center gap-1.5"
           onPress={onContinue}
           hitSlop={8}
         >
-          <Text className="text-link text-burgundy">Continue story</Text>
+          <Text className="text-link text-burgundy">Continue episode</Text>
           <Feather name="arrow-right" size={14} color={colors.burgundy} />
         </Pressable>
       </View>

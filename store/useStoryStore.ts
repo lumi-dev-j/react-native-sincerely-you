@@ -7,6 +7,9 @@ type StoryState = {
   /** Id of the response option the user picked, keyed by episode id. */
   selectedResponses: Record<string, string>;
   setSelectedResponse: (episodeId: string, responseId: string) => void;
+  /** Ids of episodes the user has finished, across all stories. */
+  completedEpisodeIds: string[];
+  completeEpisode: (episodeId: string) => void;
 };
 
 export const useStoryStore = create<StoryState>()(
@@ -20,6 +23,15 @@ export const useStoryStore = create<StoryState>()(
             [episodeId]: responseId,
           },
         })),
+      completedEpisodeIds: [],
+      completeEpisode: (episodeId) =>
+        set((state) =>
+          state.completedEpisodeIds.includes(episodeId)
+            ? state
+            : {
+                completedEpisodeIds: [...state.completedEpisodeIds, episodeId],
+              }
+        ),
     }),
     {
       name: "story-store",
