@@ -7,26 +7,28 @@ import { FeaturedStoryCard } from "@/components/FeaturedStoryCard";
 import { Image } from "@/lib/tw/image";
 import { PatternHighlightCard } from "@/components/PatternHighlightCard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { SectionTag } from "@/components/SectionTag";
 import { Stack, router } from "expo-router";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
+import {
+  countCompletedEpisodes,
+  getCurrentEpisodeId,
+  getStoryEpisodes,
+} from "@/data/episodes";
 import { images } from "@/constants/images";
 import { storyCategories } from "@/data/stories";
-
-function SectionTag({ children }: { children: string }) {
-  return (
-    <View
-      className="self-start rounded-sm border border-border/70 bg-paper-light px-2.5 py-1"
-      style={styles.tag}
-    >
-      <Text className="text-label text-burgundy" style={{ letterSpacing: 0.6 }}>
-        {children.toUpperCase()}
-      </Text>
-    </View>
-  );
-}
+import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Home() {
+  const completedEpisodeIds = useStoryStore((state) => state.completedEpisodeIds);
+
+  const datingEpisodes = getStoryEpisodes("dating");
+  const currentEpisodeId = getCurrentEpisodeId("dating", completedEpisodeIds);
+  const currentEpisode =
+    datingEpisodes.find((episode) => episode.id === currentEpisodeId) ??
+    datingEpisodes[datingEpisodes.length - 1];
+
   return (
     <View className="flex-1 bg-paper">
       <Stack.Screen options={{ headerShown: false }} />
@@ -64,13 +66,12 @@ export default function Home() {
           {/* Featured story */}
           <View className="px-5 pt-3">
             <FeaturedStoryCard
-              storyNumber={1}
               category="Dating"
-              title="Something feels off."
-              episode={4}
+              episodeNumber={currentEpisode.episodeNumber}
+              episodeTitle={currentEpisode.title}
               durationMinutes={6}
-              sceneImage={images.storyDating01Scene}
-              onContinue={() => router.push("/story/too-good-to-be-true")}
+              sceneImage={currentEpisode.coverImage}
+              onContinue={() => router.push(`/story/${currentEpisode.id}`)}
             />
           </View>
 
@@ -84,7 +85,23 @@ export default function Home() {
                   title={category.title}
                   icon={category.icon}
                   accentClass={category.accentClass}
-                  status={category.status}
+                  status={
+                    category.status.kind === "in-progress"
+                      ? {
+                          kind: "in-progress",
+                          completed: countCompletedEpisodes(
+                            category.id,
+                            completedEpisodeIds
+                          ),
+                          total: category.status.total,
+                        }
+                      : category.status
+                  }
+                  onPress={
+                    category.status.kind === "in-progress"
+                      ? () => router.push(`/story-detail/${category.id}`)
+                      : undefined
+                  }
                 />
               ))}
             </View>

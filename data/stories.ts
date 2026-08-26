@@ -4,7 +4,7 @@ import type { Feather } from "@expo/vector-icons";
 type FeatherIconName = ComponentProps<typeof Feather>["name"];
 
 export type StoryCategoryStatus =
-  | { kind: "in-progress"; completed: number; total: number }
+  | { kind: "in-progress"; total: number }
   | { kind: "coming-soon" };
 
 export type StoryCategory = {
@@ -21,7 +21,7 @@ export const storyCategories: StoryCategory[] = [
     title: "Dating",
     icon: "heart",
     accentClass: "bg-burgundy",
-    status: { kind: "in-progress", completed: 4, total: 12 },
+    status: { kind: "in-progress", total: 8 },
   },
   {
     id: "family",

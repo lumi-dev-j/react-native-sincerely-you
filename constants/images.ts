@@ -10,6 +10,9 @@ import pinkReminder from "@/assets/images/pink-reminder.png";
 import responseCard from "@/assets/images/reponse-card.png";
 import responsePageBackground from "@/assets/images/response-page-background.png";
 import storyDating01Scene from "@/assets/images/story-dating-01-scene.png";
+import storyDetailBackground from "@/assets/images/story-detail-background.png";
+import storyDetailBottomHandwritten from "@/assets/images/story-detail-bottom-handwritten.png";
+import storyDetailTornPaperCard from "@/assets/images/story-detail-torn-paper-card.png";
 import topCard from "@/assets/images/top-card.png";
 import tutorialPageBackground from "@/assets/images/tutorial-page-background.png";
 import videoPageBackground from "@/assets/images/video-page-background.png";
@@ -36,4 +39,7 @@ export const images = {
   completeEpisodeBackground,
   responsePageBackground,
   responseCard,
+  storyDetailBackground,
+  storyDetailBottomHandwritten,
+  storyDetailTornPaperCard,
 };

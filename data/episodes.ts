@@ -24,6 +24,8 @@ export type EpisodeDecision = {
 
 export type Episode = {
   id: string;
+  /** Id of the story (data/stories.ts) this episode belongs to. */
+  storyId: string;
   category: string;
   episodeNumber: number;
   /** Rendered as-is, so a literal "\n" controls the line break. */
@@ -47,6 +49,7 @@ export type Episode = {
 export const episodes: Record<string, Episode> = {
   "too-good-to-be-true": {
     id: "too-good-to-be-true",
+    storyId: "dating",
     category: "Dating",
     episodeNumber: 1,
     title: "Too Good\nto Be True",
@@ -67,6 +70,7 @@ export const episodes: Record<string, Episode> = {
   },
   "friday-night": {
     id: "friday-night",
+    storyId: "dating",
     category: "Dating",
     episodeNumber: 2,
     title: "Friday Night",
@@ -123,3 +127,108 @@ export const episodes: Record<string, Episode> = {
     nextEpisodeId: "the-little-things",
   },
 };
+
+/**
+ * Roster-level info for a story's episode list (Story Detail screen) —
+ * every episode gets one of these, whether or not its full playable content
+ * (video, decision, etc.) has been built yet. Built episodes derive theirs
+ * from `episodes` above instead of repeating title/pattern data here.
+ */
+export type EpisodeSummary = {
+  id: string;
+  storyId: string;
+  episodeNumber: number;
+  title: string;
+  coverImage?: ImageSourcePropType;
+  patterns: string[];
+};
+
+/**
+ * Episodes that are part of the story but don't have a built playable flow
+ * yet — roster info only, so the Story Detail screen can list them as
+ * upcoming/locked without fabricating story content that doesn't exist.
+ */
+const upcomingEpisodes: EpisodeSummary[] = [
+  {
+    id: "the-little-things",
+    storyId: "dating",
+    episodeNumber: 3,
+    title: "The Little Things",
+    coverImage: images.episode1Scene,
+    patterns: [],
+  },
+  {
+    id: "mixed-signals",
+    storyId: "dating",
+    episodeNumber: 4,
+    title: "Mixed Signals",
+    patterns: [],
+  },
+  {
+    id: "the-silent-treatment",
+    storyId: "dating",
+    episodeNumber: 5,
+    title: "The Silent Treatment",
+    patterns: [],
+  },
+  {
+    id: "disappearing-act",
+    storyId: "dating",
+    episodeNumber: 6,
+    title: "Disappearing Act",
+    patterns: [],
+  },
+  {
+    id: "walking-on-eggshells",
+    storyId: "dating",
+    episodeNumber: 7,
+    title: "Walking on Eggshells",
+    patterns: [],
+  },
+  {
+    id: "seeing-it-clearly",
+    storyId: "dating",
+    episodeNumber: 8,
+    title: "Seeing It Clearly",
+    patterns: [],
+  },
+];
+
+/** Every episode summary for a story, in episode-number order. */
+export function getStoryEpisodes(storyId: string): EpisodeSummary[] {
+  const built: EpisodeSummary[] = Object.values(episodes)
+    .filter((episode) => episode.storyId === storyId)
+    .map((episode) => ({
+      id: episode.id,
+      storyId: episode.storyId,
+      episodeNumber: episode.episodeNumber,
+      title: episode.title.replace(/\n/g, " "),
+      coverImage: episode.coverImage,
+      patterns: episode.discoveredPatterns,
+    }));
+
+  return [
+    ...built,
+    ...upcomingEpisodes.filter((episode) => episode.storyId === storyId),
+  ].sort((a, b) => a.episodeNumber - b.episodeNumber);
+}
+
+/** Id of the first not-yet-completed episode in the story, if any. */
+export function getCurrentEpisodeId(
+  storyId: string,
+  completedEpisodeIds: string[]
+): string | undefined {
+  return getStoryEpisodes(storyId).find(
+    (episode) => !completedEpisodeIds.includes(episode.id)
+  )?.id;
+}
+
+/** How many of the story's episodes the user has completed. */
+export function countCompletedEpisodes(
+  storyId: string,
+  completedEpisodeIds: string[]
+): number {
+  return getStoryEpisodes(storyId).filter((episode) =>
+    completedEpisodeIds.includes(episode.id)
+  ).length;
+}
