@@ -16,12 +16,14 @@ import {
   getCurrentEpisodeId,
   getStoryEpisodes,
 } from "@/data/episodes";
+import { getMostRecentPattern } from "@/data/patterns";
 import { images } from "@/constants/images";
 import { storyCategories } from "@/data/stories";
 import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Home() {
   const completedEpisodeIds = useStoryStore((state) => state.completedEpisodeIds);
+  const recentPattern = getMostRecentPattern(completedEpisodeIds);
 
   const datingEpisodes = getStoryEpisodes("dating");
   const currentEpisodeId = getCurrentEpisodeId("dating", completedEpisodeIds);
@@ -108,17 +110,20 @@ export default function Home() {
           </View>
 
           {/* Recently discovered */}
-          <View className="gap-2 pt-5">
-            <View className="px-5">
-              <SectionTag>Recently discovered</SectionTag>
+          {recentPattern ? (
+            <View className="gap-2 pt-5">
+              <View className="px-5">
+                <SectionTag>Recently discovered</SectionTag>
+              </View>
+              <View className="px-5">
+                <PatternHighlightCard
+                  title={recentPattern.title}
+                  description={recentPattern.description}
+                  patternImage={recentPattern.image}
+                />
+              </View>
             </View>
-            <View className="px-5">
-              <PatternHighlightCard
-                title="Guilt-Tripping"
-                description="When someone shifts the focus from your boundary to whether you care about them."
-              />
-            </View>
-          </View>
+          ) : null}
         </ScrollView>
 
         <View className="px-5 pt-1.5">

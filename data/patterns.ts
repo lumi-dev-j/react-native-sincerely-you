@@ -1,6 +1,9 @@
 import type { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import type { ComponentProps } from "react";
 
+import type { ImageSourcePropType } from "react-native";
+import { images } from "@/constants/images";
+
 type PatternIcon =
   | { set: "feather"; name: ComponentProps<typeof Feather>["name"] }
   | { set: "material"; name: ComponentProps<typeof MaterialCommunityIcons>["name"] };
@@ -10,6 +13,8 @@ export type PatternInsight = {
   title: string;
   description: string;
   icon: PatternIcon;
+  /** Reference photo used on the home screen's "Recently discovered" card. */
+  image: ImageSourcePropType;
 };
 
 export type PatternWatchList = {
@@ -47,6 +52,7 @@ export const patternReveals: Record<string, PatternReveal> = {
         description:
           "When someone overwhelms you with intense attention early on to create a fast, deep emotional connection.",
         icon: { set: "material", name: "sprout-outline" },
+        image: images.loveBombing,
       },
       {
         label: "Pattern 2",
@@ -54,6 +60,7 @@ export const patternReveals: Record<string, PatternReveal> = {
         description:
           "When someone talks about a future together that feels exciting but is used to gain your trust or commitment too quickly.",
         icon: { set: "material", name: "calendar-heart-outline" },
+        image: images.futureFaking,
       },
     ],
     watchFor: {
@@ -76,6 +83,7 @@ export const patternReveals: Record<string, PatternReveal> = {
         description:
           "When someone makes you feel guilty for having your own needs, plans, or boundaries—without directly asking you to change them.",
         icon: { set: "material", name: "lightbulb-outline" },
+        image: images.guiltTripping,
       },
     ],
     responses: [
@@ -113,3 +121,18 @@ export const patternReveals: Record<string, PatternReveal> = {
     reminder: "Having your own plans doesn't mean you care about someone less.",
   },
 };
+
+/**
+ * First pattern surfaced by the most recently completed episode, for the
+ * home screen's "Recently discovered" card. `completedEpisodeIds` is
+ * append-only, so the last id is the most recent completion.
+ */
+export function getMostRecentPattern(
+  completedEpisodeIds: string[]
+): PatternInsight | undefined {
+  for (let i = completedEpisodeIds.length - 1; i >= 0; i--) {
+    const patterns = patternReveals[completedEpisodeIds[i]]?.patterns;
+    if (patterns?.length) return patterns[0];
+  }
+  return undefined;
+}

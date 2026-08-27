@@ -6,15 +6,15 @@ import { Image } from "@/lib/tw/image";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
 
-// Native aspect ratio of assets/images/bottom-card.png.
-const CARD_RATIO = 1974 / 797;
+// Native aspect ratio of assets/images/pattern-card.png.
+const CARD_RATIO = 2048 / 768;
 
 type PatternHighlightCardProps = {
   title: string;
   description: string;
   ctaLabel?: string;
-  /** Scene image for the polaroid opening. Leave unset for a blank slot. */
-  sceneImage?: ImageSourcePropType;
+  /** Illustration for the pattern, shown directly on the card (no frame). */
+  patternImage?: ImageSourcePropType;
   onPress?: () => void;
 };
 
@@ -22,31 +22,32 @@ export function PatternHighlightCard({
   title,
   description,
   ctaLabel = "Explore pattern",
-  sceneImage,
+  patternImage,
   onPress,
 }: PatternHighlightCardProps) {
   return (
     // Full content width, matching the "Your Stories" rows.
     <View className="w-full" style={{ aspectRatio: CARD_RATIO }}>
-      {/* Scene slot sits behind the card art and shows through the polaroid opening */}
-      <View className="absolute left-[5%] top-[18.6%] h-[59.1%] w-[25.8%] overflow-hidden rounded-sm bg-paper">
-        {sceneImage ? (
-          <Image source={sceneImage} className="h-full w-full object-cover" />
-        ) : null}
-      </View>
-
       <Image
-        source={images.bottomCard}
+        source={images.patternCard}
         className="absolute h-full w-full object-contain"
         pointerEvents="none"
       />
 
-      {/* Clipped to the card's paper region so long content can never bleed
-          into whatever renders below the card. Anchored to the top so any
-          overflow trims from the bottom rather than slicing through a line.
-          shrink-0 on every child stops the web flexbox default (shrink: 1)
-          from squeezing text below its natural size. */}
-      <View className="absolute left-[36%] right-[8%] top-[8%] bottom-[4%] gap-2 overflow-hidden">
+      {/* Sized independently of the text column (1.3x its old box) so it can
+          overflow the text row's vertical center, matching the reference. */}
+      {patternImage ? (
+        <Image
+          source={patternImage}
+          className="absolute bottom-[6%] left-[5%] top-[6%] w-[30%] object-contain"
+        />
+      ) : null}
+
+      {/* Inset to the card's plain paper region so content never runs under
+          the botanical flourish printed into the art's bottom-right. */}
+      <View className="absolute bottom-[16%] left-[37%] right-[28%] top-[16%] gap-2">
+        {/* shrink-0 on every child stops the web flexbox default (shrink: 1)
+            from squeezing text below its natural size. */}
         <Text className="shrink-0 text-h3 text-ink" numberOfLines={1}>
           {title}
         </Text>

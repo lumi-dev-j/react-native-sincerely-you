@@ -5,9 +5,13 @@ import episode1HeroCard from "@/assets/images/episode-1-hero-card.png";
 import episode1Scene from "@/assets/images/episode-1-scene.png";
 import episode2HeroCard from "@/assets/images/episode-2-hero-card.png";
 import episode2Scene from "@/assets/images/episode-2-scene.png";
+import futureFaking from "@/assets/images/future-faking.png";
+import guiltTripping from "@/assets/images/guilt-tripping.png";
+import loveBombing from "@/assets/images/love-bombing.png";
 import noteClip from "@/assets/images/note-clip.png";
 import onboardingBackground from "@/assets/images/onboarding-background.png";
 import paperGrain from "@/assets/images/paper-grain.png";
+import patternCard from "@/assets/images/pattern-card.png";
 import pinkReminder from "@/assets/images/pink-reminder.png";
 import responseCard from "@/assets/images/reponse-card.png";
 import responsePageBackground from "@/assets/images/response-page-background.png";
@@ -46,4 +50,8 @@ export const images = {
   storyDetailBackground,
   storyDetailBottomHandwritten,
   storyDetailTornPaperCard,
+  loveBombing,
+  futureFaking,
+  guiltTripping,
+  patternCard,
 };
