@@ -1,7 +1,9 @@
 import bottomCard from "@/assets/images/bottom-card.png";
 import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
 import contextBackground from "@/assets/images/context-background.png";
+import episode1HeroCard from "@/assets/images/episode-1-hero-card.png";
 import episode1Scene from "@/assets/images/episode-1-scene.png";
+import episode2HeroCard from "@/assets/images/episode-2-hero-card.png";
 import episode2Scene from "@/assets/images/episode-2-scene.png";
 import noteClip from "@/assets/images/note-clip.png";
 import onboardingBackground from "@/assets/images/onboarding-background.png";
@@ -30,7 +32,9 @@ export const images = {
   whiteFrame,
   noteClip,
   episode1Scene,
+  episode1HeroCard,
   episode2Scene,
+  episode2HeroCard,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,

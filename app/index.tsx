@@ -70,7 +70,7 @@ export default function Home() {
               episodeNumber={currentEpisode.episodeNumber}
               episodeTitle={currentEpisode.title}
               durationMinutes={6}
-              sceneImage={currentEpisode.coverImage}
+              sceneImage={currentEpisode.heroImage ?? currentEpisode.coverImage}
               onContinue={() => router.push(`/story/${currentEpisode.id}`)}
             />
           </View>
