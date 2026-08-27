@@ -31,6 +31,8 @@ export type Episode = {
   /** Rendered as-is, so a literal "\n" controls the line break. */
   title: string;
   coverImage: ImageSourcePropType;
+  /** Scene image for the home page's featured/hero card. Falls back to coverImage when unset. */
+  heroImage?: ImageSourcePropType;
   video: VideoSource;
   /** First context line, with a bolded lead-in (usually the character names). */
   contextIntro: { emphasis: string; rest: string };
@@ -54,6 +56,7 @@ export const episodes: Record<string, Episode> = {
     episodeNumber: 1,
     title: "Too Good\nto Be True",
     coverImage: images.episode1Scene,
+    heroImage: images.episode1HeroCard,
     video: {
       uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-1.mp4",
     },
@@ -75,6 +78,7 @@ export const episodes: Record<string, Episode> = {
     episodeNumber: 2,
     title: "Friday Night",
     coverImage: images.episode2Scene,
+    heroImage: images.episode2HeroCard,
     video: {
       uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-2.mp4",
     },
@@ -140,6 +144,8 @@ export type EpisodeSummary = {
   episodeNumber: number;
   title: string;
   coverImage?: ImageSourcePropType;
+  /** Scene image for the home page's featured/hero card. Falls back to coverImage when unset. */
+  heroImage?: ImageSourcePropType;
   patterns: string[];
 };
 
@@ -204,6 +210,7 @@ export function getStoryEpisodes(storyId: string): EpisodeSummary[] {
       episodeNumber: episode.episodeNumber,
       title: episode.title.replace(/\n/g, " "),
       coverImage: episode.coverImage,
+      heroImage: episode.heroImage,
       patterns: episode.discoveredPatterns,
     }));
 

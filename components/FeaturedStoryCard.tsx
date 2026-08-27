@@ -2,6 +2,7 @@ import { Pressable, Text, View } from "@/lib/tw";
 
 import { Feather } from "@expo/vector-icons";
 import type { ImageSourcePropType } from "react-native";
+import { StyleSheet } from "react-native";
 import { Image } from "@/lib/tw/image";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
@@ -36,10 +37,18 @@ export function FeaturedStoryCard({
       className="w-full"
       style={{ aspectRatio: CARD_RATIO, transform: [{ rotate: "-3deg" }] }}
     >
-      {/* Scene slot sits behind the card art and shows through its die-cut opening */}
-      <View className="absolute left-[6.8%] top-[10.7%] h-[33.7%] w-[85.2%] overflow-hidden rounded-sm bg-paper">
+      {/* Scene slot sits behind the card art and shows through its die-cut
+          opening. Sized/positioned with StyleSheet, not NativeWind percentage
+          classes — the die-cut opening must line up pixel-precisely with
+          top-card.png's transparent window, and contentFit is set directly
+          on the Image so the fill mode can't silently fail to apply. */}
+      <View style={styles.sceneSlot}>
         {sceneImage ? (
-          <Image source={sceneImage} className="h-full w-full object-cover" />
+          <Image
+            source={sceneImage}
+            contentFit="cover"
+            style={StyleSheet.absoluteFill}
+          />
         ) : null}
       </View>
 
@@ -80,3 +89,21 @@ export function FeaturedStoryCard({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  // Sized/positioned with StyleSheet rather than NativeWind percentage
+  // classes so contentFit="cover" below is guaranteed to apply. top/height
+  // are nudged above top-card.png's coded die-cut opening (10.7%/33.7%) —
+  // the rendered opening sits ~3.4% of card height higher than that, so the
+  // original values left a visible paper-colored band above the photo.
+  sceneSlot: {
+    position: "absolute",
+    left: "6.8%",
+    top: "6.7%",
+    height: "37.7%",
+    width: "85.2%",
+    overflow: "hidden",
+    borderRadius: 2,
+    backgroundColor: colors.paper,
+  },
+});
