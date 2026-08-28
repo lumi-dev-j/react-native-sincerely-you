@@ -63,14 +63,14 @@ export function FeaturedStoryCard({
           overflow trims from the bottom rather than slicing through a line.
           shrink-0 on every child stops the web flexbox default (shrink: 1)
           from squeezing text below its natural size. */}
-      <View className="absolute left-[11%] right-[26%] top-[47%] bottom-[1%] gap-1 overflow-hidden">
+      <View className="absolute left-[11%] right-[26%] top-[47%] bottom-[6%] gap-1 overflow-hidden">
         <Text
           className="shrink-0 text-label text-burgundy"
           style={{ letterSpacing: 0.8 }}
         >
           {category.toUpperCase()} · CURRENT EPISODE
         </Text>
-        <Text className="shrink-0 text-h3 text-ink" numberOfLines={2}>
+        <Text className="shrink-0 text-h5 text-ink" numberOfLines={2}>
           Episode {String(episodeNumber).padStart(2, "0")} — {episodeTitle}
         </Text>
         <Text className="shrink-0 text-body-sm text-ink-muted">
@@ -82,7 +82,7 @@ export function FeaturedStoryCard({
           onPress={onContinue}
           hitSlop={8}
         >
-          <Text className="text-link text-burgundy">Continue episode</Text>
+          <Text className="text-link text-burgundy">Continue</Text>
           <Feather name="arrow-right" size={14} color={colors.burgundy} />
         </Pressable>
       </View>
