@@ -189,6 +189,27 @@ export const episodes: Record<string, Episode> = {
     },
     nextEpisodeId: "mixed-signals",
   },
+  "mixed-signals": {
+    id: "mixed-signals",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 4,
+    title: "Mixed Signals",
+    coverImage: images.episode4Scene,
+    heroImage: images.episode4HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-4.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy and Taylor",
+      rest: " have been\ngetting closer.",
+    },
+    contextHook: "Some days, that closeness\nfeels harder to read.",
+    discoveredPatterns: (patternReveals["mixed-signals"]?.patterns ?? []).map(
+      (pattern) => pattern.title
+    ),
+    nextEpisodeId: "the-silent-treatment",
+  },
 };
 
 /**
@@ -214,13 +235,6 @@ export type EpisodeSummary = {
  * upcoming/locked without fabricating story content that doesn't exist.
  */
 const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "mixed-signals",
-    storyId: "dating",
-    episodeNumber: 4,
-    title: "Mixed Signals",
-    patterns: [],
-  },
   {
     id: "the-silent-treatment",
     storyId: "dating",

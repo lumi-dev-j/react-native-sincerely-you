@@ -33,4 +33,11 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
       description: "Jimmy starts noticing signals\nthat don't quite line up.",
     },
   },
+  "mixed-signals": {
+    nextEpisode: {
+      episodeNumber: 5,
+      titleLine: "The Silent Treatment",
+      description: "Taylor goes quiet, and Jimmy\nis left guessing why.",
+    },
+  },
 };

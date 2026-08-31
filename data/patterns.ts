@@ -8,6 +8,12 @@ type PatternIcon =
   | { set: "feather"; name: ComponentProps<typeof Feather>["name"] }
   | { set: "material"; name: ComponentProps<typeof MaterialCommunityIcons>["name"] };
 
+export type PatternWhy = {
+  /** Small uppercase heading, e.g. "Why it can feel like love". */
+  heading: string;
+  paragraphs: string[];
+};
+
 export type PatternInsight = {
   label: string;
   title: string;
@@ -15,6 +21,8 @@ export type PatternInsight = {
   icon: PatternIcon;
   /** Reference photo used on the home screen's "Recently discovered" card. */
   image: ImageSourcePropType;
+  /** Optional expanded context shown below the description on the pattern-reveal screen. */
+  why?: PatternWhy;
 };
 
 export type PatternWatchList = {
@@ -166,6 +174,37 @@ export const patternReveals: Record<string, PatternReveal> = {
     },
     reminder:
       "A joke can still hurt. What matters is\nwhether your discomfort is respected.",
+  },
+  "mixed-signals": {
+    patterns: [
+      {
+        label: "Pattern 1",
+        title: "Push-and-Pull",
+        description:
+          "When someone shifts between intense closeness and unexpected distance, you may start wondering where you stand.",
+        icon: { set: "material", name: "swap-horizontal" },
+        image: images.pushAndPull,
+        why: {
+          heading: "Why it can feel like love",
+          paragraphs: [
+            "When warmth returns after a period of distance, the relief can feel especially powerful.",
+            "Those emotional highs can become hard to let go of — and the intensity can sometimes be mistaken for a deeper connection.",
+          ],
+        },
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Affection that repeatedly shifts between warm and distant",
+        "Feeling anxious when their attention changes",
+        "Thinking more about them when they pull away",
+        "Feeling a strong rush of relief when closeness returns",
+        "Confusing emotional intensity with emotional security",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder: "Love shouldn't keep you guessing when the warmth will return.",
   },
 };
 

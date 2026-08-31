@@ -4,7 +4,7 @@ import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Fragment, useState } from "react";
 import type { LayoutChangeEvent } from "react-native";
 import { Image } from "@/lib/tw/image";
-import type { PatternReveal } from "@/data/patterns";
+import type { PatternReveal, PatternWhy } from "@/data/patterns";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
@@ -80,6 +80,7 @@ export function PatternRevealScreen({
                 description={pattern.description}
                 icon={pattern.icon}
               />
+              {pattern.why && <WhySection why={pattern.why} />}
               <Divider />
             </Fragment>
           ))}
@@ -235,6 +236,22 @@ function PatternRow({
           {description}
         </Text>
       </View>
+    </View>
+  );
+}
+
+// Indented to align under PatternRow's text column (48px icon circle + 12px gap).
+function WhySection({ why }: { why: PatternWhy }) {
+  return (
+    <View className="gap-2 pl-[60px] pt-3">
+      <Text className="text-label text-burgundy" style={{ letterSpacing: 0.6 }}>
+        {why.heading.toUpperCase()}
+      </Text>
+      {why.paragraphs.map((paragraph, index) => (
+        <Text key={index} className="text-ink" style={{ fontSize: 12, lineHeight: 18 }}>
+          {paragraph}
+        </Text>
+      ))}
     </View>
   );
 }
