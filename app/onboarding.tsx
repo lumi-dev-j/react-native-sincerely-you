@@ -5,11 +5,19 @@ import { StyleSheet } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
+import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Onboarding() {
+  const completeOnboarding = useStoryStore((state) => state.completeOnboarding);
+
+  const handleBegin = () => {
+    completeOnboarding();
+    router.replace("/");
+  };
+
   return (
     <View className="flex-1 bg-paper-light">
       <Stack.Screen options={{ headerShown: false }} />
@@ -19,10 +27,11 @@ export default function Onboarding() {
       />
 
       <SafeAreaView style={{ flex: 1 }}>
-        <View className="flex-1 justify-end px-6 pb-4">
+        <View className="flex-1 justify-end px-6 pb-16">
           <Pressable
             className="flex-row items-center justify-center gap-3 rounded-2xl bg-burgundy-dark px-6 py-5"
             style={styles.buttonShadow}
+            onPress={handleBegin}
           >
             <Text className="text-button text-paper-light">
               Begin your journey
