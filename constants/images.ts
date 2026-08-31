@@ -8,6 +8,8 @@ import episode2HeroCard from "@/assets/images/episode-2-hero-card.png";
 import episode2Scene from "@/assets/images/episode-2-scene.png";
 import episode3HeroCard from "@/assets/images/episode-3-hero-card.png";
 import episode3Scene from "@/assets/images/episode-3-scene.png";
+import episode4HeroCard from "@/assets/images/episode-4-hero-card.png";
+import episode4Scene from "@/assets/images/episode-main-scene.png";
 import futureFaking from "@/assets/images/future-faking.png";
 import guiltTripping from "@/assets/images/guilt-tripping.png";
 import loveBombing from "@/assets/images/love-bombing.png";
@@ -16,6 +18,7 @@ import onboardingBackground from "@/assets/images/onboarding-background.png";
 import paperGrain from "@/assets/images/paper-grain.png";
 import patternCard from "@/assets/images/pattern-card.png";
 import pinkReminder from "@/assets/images/pink-reminder.png";
+import pushAndPull from "@/assets/images/push-and-pull.png";
 import responseCard from "@/assets/images/reponse-card.png";
 import responsePageBackground from "@/assets/images/response-page-background.png";
 import storyDating01Scene from "@/assets/images/story-dating-01-scene.png";
@@ -45,6 +48,8 @@ export const images = {
   episode2HeroCard,
   episode3HeroCard,
   episode3Scene,
+  episode4HeroCard,
+  episode4Scene,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,
@@ -60,4 +65,5 @@ export const images = {
   futureFaking,
   guiltTripping,
   patternCard,
+  pushAndPull,
 };
