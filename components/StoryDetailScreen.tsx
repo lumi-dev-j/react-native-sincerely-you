@@ -120,7 +120,7 @@ export function StoryDetailScreen({
                     isFirst={index === 0}
                     isLast={index === episodes.length - 1}
                     onPress={
-                      statuses[index] === "current"
+                      statuses[index] !== "locked"
                         ? () => onSelectEpisode?.(episode.id)
                         : undefined
                     }
