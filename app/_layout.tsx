@@ -11,6 +11,7 @@ import {
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import { useStoryStoreHydrated } from "@/store/useStoryStore";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,18 +23,20 @@ export default function RootLayout() {
     Inter_400Regular,
     Inter_500Medium,
   });
+  const storeHydrated = useStoryStoreHydrated();
+  const ready = fontsLoaded && storeHydrated;
 
   const onLayout = useCallback(async () => {
-    if (fontsLoaded) {
+    if (ready) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [ready]);
 
   useEffect(() => {
     onLayout();
   }, [onLayout]);
 
-  if (!fontsLoaded) {
+  if (!ready) {
     return null;
   }
 

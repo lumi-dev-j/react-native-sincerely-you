@@ -8,7 +8,7 @@ import { Image } from "@/lib/tw/image";
 import { PatternHighlightCard } from "@/components/PatternHighlightCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SectionTag } from "@/components/SectionTag";
-import { Stack, router } from "expo-router";
+import { Redirect, Stack, router } from "expo-router";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
 import {
@@ -22,8 +22,15 @@ import { storyCategories } from "@/data/stories";
 import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Home() {
+  const hasCompletedOnboarding = useStoryStore(
+    (state) => state.hasCompletedOnboarding
+  );
   const completedEpisodeIds = useStoryStore((state) => state.completedEpisodeIds);
   const recentPattern = getMostRecentPattern(completedEpisodeIds);
+
+  if (!hasCompletedOnboarding) {
+    return <Redirect href="/onboarding" />;
+  }
 
   const datingEpisodes = getStoryEpisodes("dating");
   const currentEpisodeId = getCurrentEpisodeId("dating", completedEpisodeIds);
