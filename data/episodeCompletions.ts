@@ -26,4 +26,11 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
       description: "Small comments start to\nmake Jimmy second-guess himself.",
     },
   },
+  "the-little-things": {
+    nextEpisode: {
+      episodeNumber: 4,
+      titleLine: "Mixed Signals",
+      description: "Jimmy starts noticing signals\nthat don't quite line up.",
+    },
+  },
 };

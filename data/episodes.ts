@@ -130,6 +130,65 @@ export const episodes: Record<string, Episode> = {
     },
     nextEpisodeId: "the-little-things",
   },
+  "the-little-things": {
+    id: "the-little-things",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 3,
+    title: "The Little Things",
+    coverImage: images.episode3Scene,
+    heroImage: images.episode3HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-3.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy and Taylor",
+      rest: " are getting ready\nto meet her friends.",
+    },
+    contextHook:
+      "One small comment makes Jimmy\nlook at himself a little differently.",
+    contextHookEmphasis: "Jimmy",
+    discoveredPatterns: (
+      patternReveals["the-little-things"]?.patterns ?? []
+    ).map((pattern) => pattern.title),
+    decision: {
+      question: "What would you say?",
+      subtext: "Taylor just made a comment about what Jimmy's wearing.",
+      prompt: "Choose what Jimmy says next.",
+      promptEmphasis: "next.",
+      options: [
+        {
+          id: "response-1",
+          text: "No, it's fine. Maybe I do play it a little safe.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-3-a.mp4",
+          },
+        },
+        {
+          id: "response-2",
+          text: "Okay… what do you think I should wear instead?",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-3-b.mp4",
+          },
+        },
+        {
+          id: "response-3",
+          text: "Hey, I like this shirt. You're just going to have to deal with it.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-3-c.mp4",
+          },
+        },
+        {
+          id: "response-4",
+          text: "I know you're joking, but that made me feel self-conscious.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-3-d.mp4",
+          },
+        },
+      ],
+    },
+    nextEpisodeId: "mixed-signals",
+  },
 };
 
 /**
@@ -155,14 +214,6 @@ export type EpisodeSummary = {
  * upcoming/locked without fabricating story content that doesn't exist.
  */
 const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "the-little-things",
-    storyId: "dating",
-    episodeNumber: 3,
-    title: "The Little Things",
-    coverImage: images.episode1Scene,
-    patterns: [],
-  },
   {
     id: "mixed-signals",
     storyId: "dating",

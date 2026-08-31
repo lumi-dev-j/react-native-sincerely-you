@@ -120,6 +120,53 @@ export const patternReveals: Record<string, PatternReveal> = {
     },
     reminder: "Having your own plans doesn't mean you care about someone less.",
   },
+  "the-little-things": {
+    patterns: [
+      {
+        label: "Pattern Discovered",
+        title: "Boundary Testing",
+        description:
+          "Small comments, jokes, or criticisms can test what you'll accept. What matters is whether your discomfort or preferences are respected when you express them.",
+        icon: { set: "material", name: "shield-outline" },
+        image: images.boundaryTesting,
+      },
+    ],
+    responses: [
+      {
+        id: "response-1",
+        reflection:
+          "You brushed off your discomfort to keep the moment easy. When you minimize how something made you feel, the other person may never learn where your boundary is.",
+      },
+      {
+        id: "response-2",
+        reflection:
+          "You looked to Taylor for approval and changed your choice around her preference. Notice when small comments start making you second-guess things you were comfortable with before.",
+      },
+      {
+        id: "response-3",
+        reflection:
+          "You held onto your preference without turning the moment into a confrontation. That protects your independence—but because you kept it playful, Taylor may not realize her comment actually bothered you.",
+      },
+      {
+        id: "response-4",
+        reflection:
+          "You clearly named how the comment affected you and asked for it to stop. Now the important part is what happens next: does Taylor respect that boundary over time?",
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Criticism disguised as teasing",
+        "Dismissing discomfort as being \"too sensitive\"",
+        "Repeated jokes at your expense",
+        "Changing yourself to avoid criticism",
+        "Whether clearly stated boundaries are respected",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "A joke can still hurt. What matters is\nwhether your discomfort is respected.",
+  },
 };
 
 /**
