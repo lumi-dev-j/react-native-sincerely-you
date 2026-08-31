@@ -3,12 +3,18 @@ import { Pressable, Text, View } from "@/lib/tw";
 import { Feather } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 import { colors } from "@/constants/colors";
+import { router } from "expo-router";
 
 type NavTabKey = "home" | "patterns";
 
-const TABS: { key: NavTabKey; label: string; icon: React.ComponentProps<typeof Feather>["name"] }[] = [
-  { key: "home", label: "Home", icon: "home" },
-  { key: "patterns", label: "Patterns", icon: "compass" },
+const TABS: {
+  key: NavTabKey;
+  label: string;
+  icon: React.ComponentProps<typeof Feather>["name"];
+  href: "/" | "/patterns";
+}[] = [
+  { key: "home", label: "Home", icon: "home", href: "/" },
+  { key: "patterns", label: "Patterns", icon: "compass", href: "/patterns" },
 ];
 
 type BottomNavProps = {
@@ -24,7 +30,11 @@ export function BottomNav({ activeTab = "home" }: BottomNavProps) {
       {TABS.map((tab) => {
         const isActive = tab.key === activeTab;
         return (
-          <Pressable key={tab.key} className="flex-1 items-center gap-1">
+          <Pressable
+            key={tab.key}
+            className="flex-1 items-center gap-1"
+            onPress={() => !isActive && router.replace(tab.href)}
+          >
             <Feather
               name={tab.icon}
               size={18}
