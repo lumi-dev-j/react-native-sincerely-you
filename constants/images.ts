@@ -1,10 +1,13 @@
 import bottomCard from "@/assets/images/bottom-card.png";
+import boundaryTesting from "@/assets/images/boundary-testing.png";
 import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
 import contextBackground from "@/assets/images/context-background.png";
 import episode1HeroCard from "@/assets/images/episode-1-hero-card.png";
 import episode1Scene from "@/assets/images/episode-1-scene.png";
 import episode2HeroCard from "@/assets/images/episode-2-hero-card.png";
 import episode2Scene from "@/assets/images/episode-2-scene.png";
+import episode3HeroCard from "@/assets/images/episode-3-hero-card.png";
+import episode3Scene from "@/assets/images/episode-3-scene.png";
 import futureFaking from "@/assets/images/future-faking.png";
 import guiltTripping from "@/assets/images/guilt-tripping.png";
 import loveBombing from "@/assets/images/love-bombing.png";
@@ -30,6 +33,7 @@ export const images = {
   onboardingBackground,
   topCard,
   bottomCard,
+  boundaryTesting,
   paperGrain,
   storyDating01Scene,
   contextBackground,
@@ -39,6 +43,8 @@ export const images = {
   episode1HeroCard,
   episode2Scene,
   episode2HeroCard,
+  episode3HeroCard,
+  episode3Scene,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,

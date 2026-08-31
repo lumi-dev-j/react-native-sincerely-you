@@ -298,7 +298,10 @@ function EpisodeThumbnail({
         {locked ? (
           <Feather name="lock" size={16} color={colors.inkMuted} />
         ) : coverImage ? (
-          <Image source={coverImage} className="h-full w-full object-cover" />
+          <Image
+            source={coverImage}
+            className="h-full w-full object-cover object-top"
+          />
         ) : null}
       </View>
     </View>

@@ -132,7 +132,7 @@ export function EpisodeContextScreen({
                 >
                   <Image
                     source={episode.coverImage}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover object-top"
                   />
                 </View>
                 <Image
