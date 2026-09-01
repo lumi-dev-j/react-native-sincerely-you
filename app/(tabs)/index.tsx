@@ -1,16 +1,15 @@
-import { Pressable, ScrollView, Text, View } from "@/lib/tw";
+import { ScrollView, Text, View } from "@/lib/tw";
 
-import { BottomNav } from "@/components/BottomNav";
 import { CategoryStoryRow } from "@/components/CategoryStoryRow";
-import { Feather } from "@expo/vector-icons";
 import { FeaturedStoryCard } from "@/components/FeaturedStoryCard";
 import { Image } from "@/lib/tw/image";
 import { PatternHighlightCard } from "@/components/PatternHighlightCard";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { SectionTag } from "@/components/SectionTag";
-import { Redirect, Stack, router } from "expo-router";
-import { StyleSheet } from "react-native";
-import { colors } from "@/constants/colors";
+import { Redirect, router } from "expo-router";
 import {
   countCompletedEpisodes,
   getCurrentEpisodeId,
@@ -22,6 +21,7 @@ import { storyCategories } from "@/data/stories";
 import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Home() {
+  const insets = useSafeAreaInsets();
   const hasCompletedOnboarding = useStoryStore(
     (state) => state.hasCompletedOnboarding
   );
@@ -40,7 +40,6 @@ export default function Home() {
 
   return (
     <View className="flex-1 bg-paper">
-      <Stack.Screen options={{ headerShown: false }} />
       {/* Very subtle paper-grain texture over the flat screen background.
           The grain's own alpha channel is already faint (~8% max), so no
           extra opacity is layered on top. */}
@@ -52,24 +51,15 @@ export default function Home() {
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView
           className="flex-1"
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={{ paddingBottom: insets.bottom + 96 }}
           showsVerticalScrollIndicator={false}
         >
           {/* Header */}
-          <View className="flex-row items-start justify-between px-5 pt-3">
-            <View className="gap-1">
-              <Text className="text-h1 text-ink">Welcome back.</Text>
-              <Text className="text-body-md text-ink-muted">
-                Your story is waiting.
-              </Text>
-            </View>
-            <Pressable
-              className="h-10 w-10 items-center justify-center rounded-full bg-paper-light"
-              style={styles.settingsShadow}
-              hitSlop={8}
-            >
-              <Feather name="settings" size={18} color={colors.ink} />
-            </Pressable>
+          <View className="gap-1 px-5 pt-3">
+            <Text className="text-h1 text-ink">Welcome back.</Text>
+            <Text className="text-body-md text-ink-muted">
+              Your story is waiting.
+            </Text>
           </View>
 
           {/* Featured story */}
@@ -87,7 +77,7 @@ export default function Home() {
           {/* Your stories */}
           <View className="gap-2 px-5 pt-5">
             <SectionTag>Your stories</SectionTag>
-            <View className="gap-2">
+            <View className="gap-0.5">
               {storyCategories.map((category) => (
                 <CategoryStoryRow
                   key={category.id}
@@ -118,11 +108,16 @@ export default function Home() {
 
           {/* Recently discovered */}
           {recentPattern ? (
-            <View className="gap-2 pt-5">
+            <View className="pt-5">
               <View className="px-5">
                 <SectionTag>Recently discovered</SectionTag>
               </View>
-              <View className="px-5">
+              {/* The pattern-card art has a baked-in ~1.8% transparent margin
+                  on each side, so px-5 alone would leave the visible card
+                  narrower than the rows/tabs above and below it. It also has
+                  a ~4% transparent margin on top, so pull the card up
+                  slightly to tighten the visual gap below the tag. */}
+              <View className="-mt-0.5 px-3.5">
                 <PatternHighlightCard
                   title={recentPattern.title}
                   description={recentPattern.description}
@@ -132,32 +127,7 @@ export default function Home() {
             </View>
           ) : null}
         </ScrollView>
-
-        <View className="px-5 pt-1.5">
-          <BottomNav activeTab="home" />
-        </View>
       </SafeAreaView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  scrollContent: {
-    paddingBottom: 12,
-  },
-  settingsShadow: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 2,
-  },
-  tag: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 1,
-    elevation: 1,
-    transform: [{ rotate: "-1deg" }],
-  },
-});
