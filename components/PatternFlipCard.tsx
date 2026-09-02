@@ -85,7 +85,7 @@ export function PatternFlipCard({
           ]}
         >
           <Image
-            source={images.tornPatternCard}
+            source={images.tornPatternCardParchment}
             className="absolute h-full w-full object-contain"
             pointerEvents="none"
           />
@@ -93,7 +93,7 @@ export function PatternFlipCard({
             <Image
               source={pattern.image}
               className="h-[40%] w-full object-contain"
-              style={{ marginTop: 20, marginBottom: 8 }}
+              style={{ marginTop: 35, marginBottom: 8 }}
             />
             <HeartDivider />
             <Text
@@ -130,7 +130,7 @@ export function PatternFlipCard({
           ]}
         >
           <Image
-            source={images.tornPatternCard}
+            source={images.tornPatternCardParchment}
             className="absolute h-full w-full object-contain"
             pointerEvents="none"
           />

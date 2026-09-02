@@ -109,7 +109,7 @@ function DeckNav({
   return (
     <View
       className="flex-row items-center justify-center gap-8 pt-3"
-      style={{ paddingBottom: 56 }}
+      style={{ paddingBottom: 66 }}
     >
       <Pressable
         className="flex-row items-center gap-1.5"

@@ -50,12 +50,16 @@ function TabButton({
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const tabBarPosition = {
+    ...styles.tabBar,
+    bottom: Math.max(insets.bottom - 11, 0),
+  };
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { ...styles.tabBar, bottom: Math.max(insets.bottom - 11, 0) },
+        tabBarStyle: tabBarPosition,
       }}
     >
       <Tabs.Screen
@@ -69,6 +73,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="patterns"
         options={{
+          tabBarStyle: {
+            ...tabBarPosition,
+            backgroundColor: colors.parchment,
+          },
           tabBarButton: (props) => (
             <TabButton {...props} icon="compass" label="Patterns" />
           ),
@@ -82,8 +90,9 @@ const styles = StyleSheet.create({
   tabBar: {
     position: "absolute",
     marginHorizontal: 18,
-    height: 54,
-    paddingBottom: 0,
+    height: 64,
+    paddingTop: 5,
+    paddingBottom: 5,
     borderRadius: 18,
     backgroundColor: colors.paperLight,
     borderTopWidth: 0,

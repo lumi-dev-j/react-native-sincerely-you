@@ -20,7 +20,7 @@ const OVERLAP_RATIO = 0.46;
 // Cards moved down uniformly, independent of the tape headroom above.
 const CARD_OFFSET_Y = 50;
 // Extra card height. Width grows with it so the paper keeps its native ratio.
-const CARD_HEIGHT_EXTRA = 55;
+const CARD_HEIGHT_EXTRA = 70;
 const ARC_DROP_RATIO = 0.05;
 const ARC_TILT_DEG = 5;
 
