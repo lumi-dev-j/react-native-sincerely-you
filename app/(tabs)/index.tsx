@@ -122,6 +122,12 @@ export default function Home() {
                   title={recentPattern.title}
                   description={recentPattern.description}
                   patternImage={recentPattern.image}
+                  onPress={() =>
+                    router.push({
+                      pathname: "/(tabs)/patterns",
+                      params: { pattern: recentPattern.id },
+                    })
+                  }
                 />
               </View>
             </View>

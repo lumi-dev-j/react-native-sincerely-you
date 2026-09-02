@@ -27,7 +27,11 @@ export function PatternHighlightCard({
 }: PatternHighlightCardProps) {
   return (
     // Full content width, matching the "Your Stories" rows.
-    <View className="w-full" style={{ aspectRatio: CARD_RATIO }}>
+    <Pressable
+      className="w-full"
+      style={{ aspectRatio: CARD_RATIO }}
+      onPress={onPress}
+    >
       <Image
         source={images.patternCard}
         className="absolute h-full w-full object-contain"
@@ -54,15 +58,11 @@ export function PatternHighlightCard({
         <Text className="shrink-0 text-body-sm text-ink" numberOfLines={3}>
           {description}
         </Text>
-        <Pressable
-          className="shrink-0 flex-row items-center gap-1.5"
-          onPress={onPress}
-          hitSlop={8}
-        >
+        <View className="shrink-0 flex-row items-center gap-1.5">
           <Text className="text-link text-burgundy">{ctaLabel}</Text>
           <Feather name="arrow-right" size={14} color={colors.burgundy} />
-        </Pressable>
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
