@@ -4,11 +4,8 @@ import { useEffect, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Image } from "@/lib/tw/image";
 import { PatternDeck } from "@/components/PatternDeck";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import { colors } from "@/constants/colors";
 import { getUnlockedPatterns } from "@/data/patterns";
 import { images } from "@/constants/images";
@@ -16,7 +13,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useStoryStore } from "@/store/useStoryStore";
 
 export default function Patterns() {
-  const insets = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
   const completedEpisodeIds = useStoryStore(
     (state) => state.completedEpisodeIds
   );
@@ -42,51 +39,53 @@ export default function Patterns() {
   }, [selectedPatternId]);
 
   return (
-    <View className="flex-1 bg-paper">
+    <View className="flex-1 bg-ink">
       <Image
-        source={images.paperGrain}
+        source={images.updatedPatternsBackground}
         className="absolute h-full w-full object-cover"
         pointerEvents="none"
       />
-      <SafeAreaView style={{ flex: 1 }}>
-        <View className="gap-1 px-5 pt-3">
-          <Text className="text-h1 text-ink">Patterns</Text>
-          <Text className="text-hint text-ink-muted">
-            Every pattern you&apos;ve uncovered, gathered in one place.
+      <SafeAreaView style={{ flex: 1, overflow: "visible" }}>
+        <View className="gap-1 px-5 pt-2">
+          <Text className="text-h2 text-burgundy-dark">Patterns</Text>
+          {/* Hard-broken at the same point as the reference, rather than
+              left to wrap — a wider device would otherwise pull this onto
+              one long line. */}
+          <Text
+            className="max-w-[78%] text-hint text-ink"
+            style={{ fontSize: 13, lineHeight: 18 }}
+          >
+            {"Every pattern you've uncovered,\ngathered in one place."}
           </Text>
         </View>
 
-        <View className="px-5 pt-4">
-          <Feather name="heart" size={22} color={colors.burgundy} />
+        <View className="px-5 pt-2">
+          <Feather name="heart" size={16} color={colors.burgundy} />
         </View>
 
         {patterns.length === 0 ? (
           <EmptyState />
         ) : (
           <>
-            <View className="items-center pt-4">
-              <Text
-                className="text-label text-burgundy"
-                style={{ letterSpacing: 1 }}
-              >
-                {String(activeIndex + 1).padStart(2, "0")} /{" "}
-                {String(patterns.length).padStart(2, "0")}
-              </Text>
-            </View>
+            {/* A fixed fraction of window height, not flex-1 — flex-1 fills
+                *whatever* space the (now smaller) elements below leave
+                over, which pushed the deck down as those elements shrank
+                instead of moving it up. Pinning this to the window height
+                keeps the deck's position predictable and keeps the
+                background dominant above it, while still scaling with
+                the device rather than a hardcoded pixel value. */}
+            <View style={{ height: windowHeight * 0.06 }} />
 
-            <View className="flex-1 justify-center">
-              <PatternDeck
-                patterns={patterns}
-                activeIndex={activeIndex}
-                onActiveIndexChange={setActiveIndex}
-              />
-            </View>
+            <PatternDeck
+              patterns={patterns}
+              activeIndex={activeIndex}
+              onActiveIndexChange={setActiveIndex}
+            />
 
             <DeckNav
               activeIndex={activeIndex}
               total={patterns.length}
               onChange={setActiveIndex}
-              bottomInset={insets.bottom}
             />
           </>
         )}
@@ -99,43 +98,51 @@ function DeckNav({
   activeIndex,
   total,
   onChange,
-  bottomInset,
 }: {
   activeIndex: number;
   total: number;
   onChange: (index: number) => void;
-  bottomInset: number;
 }) {
   const canGoPrevious = activeIndex > 0;
   const canGoNext = activeIndex < total - 1;
 
   return (
     <View
-      className="flex-row items-center justify-center gap-6 pt-6"
-      style={{ paddingBottom: bottomInset + 96 }}
+      className="flex-row items-center justify-center gap-8 pt-3"
+      style={{ paddingBottom: 56 }}
     >
       <Pressable
-        className="flex-row items-center gap-2"
+        className="flex-row items-center gap-1.5"
         style={{ opacity: canGoPrevious ? 1 : 0.35 }}
         onPress={() => canGoPrevious && onChange(activeIndex - 1)}
         disabled={!canGoPrevious}
         hitSlop={8}
       >
-        <Feather name="arrow-left" size={16} color={colors.burgundyDark} />
-        <Text className="text-link text-burgundy-dark">Previous</Text>
+        <Feather name="arrow-left" size={14} color={colors.roseDust} />
+        <Text
+          className="font-sans-medium"
+          style={{ color: colors.roseDust, fontSize: 14, lineHeight: 18 }}
+        >
+          Previous
+        </Text>
       </Pressable>
 
-      <View className="h-4 w-px bg-border" />
+      <View className="h-5 w-px bg-rose-dust/70" />
 
       <Pressable
-        className="flex-row items-center gap-2"
+        className="flex-row items-center gap-1.5"
         style={{ opacity: canGoNext ? 1 : 0.35 }}
         onPress={() => canGoNext && onChange(activeIndex + 1)}
         disabled={!canGoNext}
         hitSlop={8}
       >
-        <Text className="text-link text-burgundy-dark">Next</Text>
-        <Feather name="arrow-right" size={16} color={colors.burgundyDark} />
+        <Text
+          className="font-sans-medium"
+          style={{ color: colors.roseDust, fontSize: 14, lineHeight: 18 }}
+        >
+          Next
+        </Text>
+        <Feather name="arrow-right" size={14} color={colors.roseDust} />
       </Pressable>
     </View>
   );

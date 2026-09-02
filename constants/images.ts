@@ -30,6 +30,7 @@ import storyDetailTornPaperCard from "@/assets/images/story-detail-torn-paper-ca
 import topCard from "@/assets/images/top-card.png";
 import tornPatternCard from "@/assets/images/torn-pattern-card.png";
 import tutorialPageBackground from "@/assets/images/tutorial-page-background.png";
+import updatedPatternsBackground from "@/assets/images/updated-patterns-background.png";
 import videoPageBackground from "@/assets/images/video-page-background.png";
 import videoPageNoteClip from "@/assets/images/video-page-note-clip.png";
 import videoPageWhiteFrame from "@/assets/images/video-page-white-frame.png";
@@ -72,4 +73,5 @@ export const images = {
   tornPatternCard,
   maskingTape,
   emptyPattern,
+  updatedPatternsBackground,
 };

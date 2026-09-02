@@ -8,7 +8,11 @@ import type { PatternInsight } from "@/data/patterns";
 import { colors } from "@/constants/colors";
 import { images } from "@/constants/images";
 
-// Native aspect ratio of assets/images/torn-pattern-card.png.
+// Native aspect ratio of assets/images/torn-pattern-card.png. Stretching
+// this taller (as tried previously, via object-fill) distorted the paper
+// texture and threw off the tape's calibrated overlap — matching the
+// reference's proportions means keeping the asset's own ratio and sizing
+// the card via width instead.
 export const CARD_RATIO = 1024 / 1536;
 
 type PatternFlipCardProps = {
@@ -63,16 +67,13 @@ export function PatternFlipCard({
 
   return (
     <View className="w-full" style={{ aspectRatio: CARD_RATIO }}>
-      {/* Tape pinning the focused card in place — unfocused cards in the
-          deck sit plain, matching the reference design. */}
-      {active ? (
-        <Image
-          source={images.maskingTape}
-          className="absolute self-center object-contain"
-          style={styles.tape}
-          pointerEvents="none"
-        />
-      ) : null}
+      {/* Tape pinning every card in the deck, matching the reference design. */}
+      <Image
+        source={images.maskingTape}
+        className="absolute self-center object-contain"
+        style={styles.tape}
+        pointerEvents="none"
+      />
 
       <Pressable onPress={handlePress} style={styles.pressable}>
         {/* Front — illustration + title, "Tap to reveal" hint. */}
@@ -88,33 +89,33 @@ export function PatternFlipCard({
             className="absolute h-full w-full object-contain"
             pointerEvents="none"
           />
-          <View className="absolute left-[10%] right-[10%] top-[9%] bottom-[9%] items-center">
+          <View className="absolute left-[10%] right-[10%] top-[9%] bottom-[14%] items-center">
             <Image
               source={pattern.image}
-              className="h-[38%] w-full object-contain"
+              className="h-[40%] w-full object-contain"
+              style={{ marginTop: 20, marginBottom: 8 }}
             />
             <HeartDivider />
             <Text
-              className="pt-3 text-center text-h2 text-ink"
+              className="pt-2.5 text-center text-h2 text-ink"
               numberOfLines={2}
             >
-              {pattern.title}
+              {splitTitle(pattern.title)}
             </Text>
-            <View className="mt-3 h-px w-10 bg-rose-dust" />
             {active ? (
-              <>
-                <View className="flex-1" />
-                <View className="flex-row items-center gap-1.5 pb-2">
-                  <Text className="text-body-md text-ink-muted">
-                    Tap to reveal
-                  </Text>
-                  <Feather
-                    name="refresh-cw"
-                    size={14}
-                    color={colors.inkMuted}
-                  />
-                </View>
-              </>
+              // Pinned to the bottom of the card independently of the
+              // content above — as a flex-flow item it competed with the
+              // icon/title for space, and got squeezed out of view
+              // entirely once the icon grew large enough to fill it.
+              <View className="absolute bottom-0 left-0 right-0 flex-row items-center justify-center gap-1">
+                <Text
+                  className="text-ink-muted"
+                  style={{ fontSize: 12, lineHeight: 16 }}
+                >
+                  Tap to reveal
+                </Text>
+                <Feather name="refresh-cw" size={11} color={colors.inkMuted} />
+              </View>
             ) : null}
           </View>
         </Animated.View>
@@ -133,18 +134,21 @@ export function PatternFlipCard({
             className="absolute h-full w-full object-contain"
             pointerEvents="none"
           />
-          <View className="absolute left-[10%] right-[10%] top-[9%] bottom-[9%] items-center justify-center gap-3">
+          <View className="absolute left-[10%] right-[10%] top-[9%] bottom-[9%] items-center justify-center gap-2">
             <Text
               className="text-label text-burgundy"
-              style={{ letterSpacing: 0.6 }}
+              style={{ fontSize: 10, lineHeight: 13, letterSpacing: 0.6 }}
             >
               {pattern.label.toUpperCase()}
             </Text>
             <Text className="text-center text-h2 text-burgundy-dark">
-              {pattern.title}
+              {splitTitle(pattern.title)}
             </Text>
-            <View className="h-px w-10 bg-rose-dust" />
-            <Text className="text-center text-body-md text-ink">
+            <View className="h-px w-8 bg-rose-dust" />
+            <Text
+              className="text-center text-ink"
+              style={{ fontSize: 13, lineHeight: 19 }}
+            >
               {pattern.description}
             </Text>
           </View>
@@ -154,20 +158,32 @@ export function PatternFlipCard({
   );
 }
 
+// Breaks every title onto two lines, e.g. "Future Faking" ->
+// "Future\nFaking", instead of leaving it to wrap naturally. Hyphens are
+// dropped first (turning "Guilt-Tripping" into "Guilt Tripping") so a
+// hyphenated title breaks the same clean way, with no dash left in the
+// wrapped text.
+function splitTitle(title: string): string {
+  return title.replace(/-/g, " ").replace(" ", "\n");
+}
+
 // A small "──── ♡ ────" ornament, echoing the app's heart motif.
 function HeartDivider() {
   return (
-    <View className="mt-4 flex-row items-center gap-2">
-      <View className="h-px w-8 bg-rose-dust" />
-      <Feather name="heart" size={12} color={colors.burgundy} />
-      <View className="h-px w-8 bg-rose-dust" />
+    <View className="mt-3 flex-row items-center gap-1.5">
+      <View className="h-px w-6 bg-rose-dust" />
+      <Feather name="heart" size={10} color={colors.burgundy} />
+      <View className="h-px w-6 bg-rose-dust" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   tape: {
-    top: "-7%",
+    // masking-tape.png has ~13% transparent padding above and below the
+    // drawn tape within its own canvas. -2% leaves about half the visible
+    // strip on the card and half above it.
+    top: "-2%",
     width: "46%",
     aspectRatio: 2172 / 724,
     transform: [{ rotate: "-2deg" }],
@@ -187,8 +203,8 @@ const styles = StyleSheet.create({
   shadow: {
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12,
-    shadowRadius: 10,
-    elevation: 3,
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 6,
   },
 });
