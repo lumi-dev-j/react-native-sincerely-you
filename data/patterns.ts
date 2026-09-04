@@ -15,6 +15,8 @@ export type PatternWhy = {
 };
 
 export type PatternInsight = {
+  /** Stable id used to link to a specific pattern, e.g. from the home screen's card or a deep link. */
+  id: string;
   label: string;
   title: string;
   description: string;
@@ -55,6 +57,7 @@ export const patternReveals: Record<string, PatternReveal> = {
   "too-good-to-be-true": {
     patterns: [
       {
+        id: "love-bombing",
         label: "Pattern 1",
         title: "Love Bombing",
         description:
@@ -63,6 +66,7 @@ export const patternReveals: Record<string, PatternReveal> = {
         image: images.loveBombing,
       },
       {
+        id: "future-faking",
         label: "Pattern 2",
         title: "Future Faking",
         description:
@@ -86,6 +90,7 @@ export const patternReveals: Record<string, PatternReveal> = {
   "friday-night": {
     patterns: [
       {
+        id: "guilt-tripping",
         label: "Pattern Discovered",
         title: "Guilt-Tripping",
         description:
@@ -131,6 +136,7 @@ export const patternReveals: Record<string, PatternReveal> = {
   "the-little-things": {
     patterns: [
       {
+        id: "boundary-testing",
         label: "Pattern Discovered",
         title: "Boundary Testing",
         description:
@@ -178,6 +184,7 @@ export const patternReveals: Record<string, PatternReveal> = {
   "mixed-signals": {
     patterns: [
       {
+        id: "push-and-pull",
         label: "Pattern 1",
         title: "Push-and-Pull",
         description:
@@ -221,4 +228,27 @@ export function getMostRecentPattern(
     if (patterns?.length) return patterns[0];
   }
   return undefined;
+}
+
+/**
+ * Every pattern the user has uncovered so far, for the Patterns tab —
+ * flattened across all completed episodes, in the order they were
+ * discovered. `completedEpisodeIds` is append-only, so this list only
+ * grows as episodes are completed.
+ */
+export function getUnlockedPatterns(
+  completedEpisodeIds: string[]
+): PatternInsight[] {
+  const seen = new Set<string>();
+  const unlocked: PatternInsight[] = [];
+
+  for (const episodeId of completedEpisodeIds) {
+    for (const pattern of patternReveals[episodeId]?.patterns ?? []) {
+      if (seen.has(pattern.id)) continue;
+      seen.add(pattern.id);
+      unlocked.push(pattern);
+    }
+  }
+
+  return unlocked;
 }

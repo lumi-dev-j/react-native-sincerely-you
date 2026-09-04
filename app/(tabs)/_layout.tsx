@@ -30,9 +30,9 @@ function TabButton({
       style={[styles.tabItem, style]}
     >
       <View style={styles.tabContent}>
-        <Feather name={icon} size={24} color={color} />
+        <Feather name={icon} size={20} color={color} />
         <Text
-          style={[styles.tabLabel, { color, marginTop: 6 }]}
+          style={[styles.tabLabel, { color, marginTop: 5 }]}
           numberOfLines={1}
         >
           {label}
@@ -50,12 +50,16 @@ function TabButton({
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const tabBarPosition = {
+    ...styles.tabBar,
+    bottom: Math.max(insets.bottom - 11, 0),
+  };
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { ...styles.tabBar, bottom: Math.max(insets.bottom - 11, 0) },
+        tabBarStyle: tabBarPosition,
       }}
     >
       <Tabs.Screen
@@ -69,6 +73,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="patterns"
         options={{
+          tabBarStyle: {
+            ...tabBarPosition,
+            backgroundColor: colors.parchment,
+          },
           tabBarButton: (props) => (
             <TabButton {...props} icon="compass" label="Patterns" />
           ),
@@ -81,10 +89,11 @@ export default function TabsLayout() {
 const styles = StyleSheet.create({
   tabBar: {
     position: "absolute",
-    marginHorizontal: 20,
+    marginHorizontal: 18,
     height: 64,
-    paddingBottom: 0,
-    borderRadius: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderRadius: 18,
     backgroundColor: colors.paperLight,
     borderTopWidth: 0,
     shadowColor: "#000",
@@ -100,17 +109,17 @@ const styles = StyleSheet.create({
   },
   tabContent: {
     alignItems: "center",
-    transform: [{ translateY: 3 }],
+    transform: [{ translateY: 2 }],
   },
   tabLabel: {
     fontFamily: "Inter_500Medium",
-    fontSize: 12,
-    lineHeight: 16,
+    fontSize: 11,
+    lineHeight: 14,
   },
   tabUnderline: {
-    marginTop: 6,
+    marginTop: 5,
     height: 2,
-    width: 28,
+    width: 24,
     borderRadius: 1,
   },
 });

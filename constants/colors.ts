@@ -11,6 +11,8 @@ export const colors = {
   inkMuted: "#6F6862",
   paper: "#F4EDE2",
   paperLight: "#FAF6EF",
+  // Midway between paperLight and the Patterns mock's darker parchment.
+  parchment: "#E6D8C7",
   border: "#DDD3C7",
 
   sage: "#858574",
