@@ -3,6 +3,7 @@ import boundaryTesting from "@/assets/images/boundary-testing.png";
 import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
 import contextBackground from "@/assets/images/context-background.png";
 import emptyPattern from "@/assets/images/empty-pattern.png";
+import emptyPatternsIcon from "@/assets/images/empty-patterns-icon.png";
 import episode1HeroCard from "@/assets/images/episode-1-hero-card.png";
 import episode1Scene from "@/assets/images/episode-1-scene.png";
 import episode2HeroCard from "@/assets/images/episode-2-hero-card.png";
@@ -75,5 +76,6 @@ export const images = {
   tornPatternCardParchment,
   maskingTape,
   emptyPattern,
+  emptyPatternsIcon,
   updatedPatternsBackground,
 };

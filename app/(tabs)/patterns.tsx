@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import { Image } from "@/lib/tw/image";
 import { PatternDeck } from "@/components/PatternDeck";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { colors } from "@/constants/colors";
 import { getUnlockedPatterns } from "@/data/patterns";
 import { images } from "@/constants/images";
@@ -148,42 +148,46 @@ function DeckNav({
   );
 }
 
+const EMPTY_COPY = "#F3E2A6";
+const EMPTY_CTA = "#E8B4B4";
+
 function EmptyState() {
   return (
-    <View className="flex-1 items-center justify-center px-5 pb-24">
-      <View
-        className="w-full items-center gap-3 rounded-2xl bg-paper-light px-6 py-8"
-        style={styles.shadow}
-      >
+    <View className="flex-1 items-center justify-center px-8 pb-24">
+      <View className="items-center" style={{ marginTop: 140 }}>
         <Image
-          source={images.emptyPattern}
-          className="h-16 w-16 object-contain"
+          source={images.emptyPatternsIcon}
+          className="h-[101px] w-[101px] object-contain"
         />
-        <Text className="pt-1 text-center text-h3 text-ink">
-          Your first pattern is waiting
+        <Text
+          className="mt-6 text-center text-h1"
+          style={{ color: EMPTY_COPY }}
+        >
+          No Patterns Yet
         </Text>
-        <Text className="text-center text-body-md text-ink-muted">
-          Play through a story and learn to spot the subtle signs.
+        <Text
+          className="mt-3 max-w-[280px] text-center font-serif"
+          style={{ color: EMPTY_COPY, fontSize: 16, lineHeight: 22 }}
+        >
+          They&apos;ll appear here as you move through the story.
         </Text>
         <Pressable
-          className="mt-2 flex-row items-center gap-1.5"
+          className="mt-8 items-center"
           onPress={() => router.push("/story-detail/dating")}
           hitSlop={8}
         >
-          <Text className="text-link text-burgundy">Start discovering</Text>
-          <Feather name="arrow-right" size={14} color={colors.burgundy} />
+          <View className="flex-row items-center gap-1.5">
+            <Text className="text-link" style={{ color: EMPTY_CTA }}>
+              Continue story
+            </Text>
+            <Feather name="arrow-right" size={14} color={EMPTY_CTA} />
+          </View>
+          <View
+            className="mt-1.5 h-px w-14"
+            style={{ backgroundColor: EMPTY_CTA }}
+          />
         </Pressable>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 10,
-    elevation: 2,
-  },
-});
