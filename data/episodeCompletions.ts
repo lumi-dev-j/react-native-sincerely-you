@@ -40,4 +40,11 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
       description: "Taylor goes quiet, and Jimmy\nis left guessing why.",
     },
   },
+  "the-silent-treatment": {
+    nextEpisode: {
+      episodeNumber: 6,
+      titleLine: "Disappearing Act",
+      description: "Jimmy notices a pattern in\nwhen Taylor goes quiet.",
+    },
+  },
 };

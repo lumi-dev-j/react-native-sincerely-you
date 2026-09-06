@@ -213,6 +213,54 @@ export const patternReveals: Record<string, PatternReveal> = {
     },
     reminder: "Love shouldn't keep you guessing when the warmth will return.",
   },
+  "the-silent-treatment": {
+    patterns: [
+      {
+        id: "silent-treatment",
+        label: "Pattern Discovered",
+        title: "Silent Treatment",
+        description:
+          "When someone withdraws communication after conflict, you may be left wondering what you did wrong—or what you need to do to make things okay again.",
+        icon: { set: "material", name: "chat-outline" },
+        image: images.silentTreatment,
+      },
+    ],
+    responses: [
+      {
+        id: "response-1",
+        reflection:
+          "You looked for reassurance when Taylor became distant. It's natural to want clarity, but repeatedly trying to figure out what you did wrong can turn someone else's silence into your responsibility.",
+      },
+      {
+        id: "response-2",
+        reflection:
+          "You apologized to restore the connection, even though keeping your plans wasn't necessarily wrong. When warmth returns after an apology, it can teach you to take responsibility for the distance just to make things feel okay again.",
+      },
+      {
+        id: "response-3",
+        reflection:
+          "You protected yourself by withdrawing too. That may stop you from chasing for reassurance, but matching silence with silence can leave the real issue unresolved and create even more distance.",
+      },
+      {
+        id: "response-4",
+        reflection:
+          "You acknowledged the distance and left the door open to talk without taking responsibility for figuring out what Taylor wouldn't communicate. This gives her space while keeping communication a shared responsibility.",
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Silence that repeatedly follows disagreements",
+        "Not knowing when they'll speak to you again",
+        "Feeling pressure to apologize just to restore the connection",
+        "Replaying the conflict to figure out what you did wrong",
+        "Changing your behavior to avoid being shut out again",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "Needing space is okay. Leaving someone to guess\nwhere they stand is different.",
+  },
 };
 
 /**

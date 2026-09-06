@@ -210,6 +210,63 @@ export const episodes: Record<string, Episode> = {
     ),
     nextEpisodeId: "the-silent-treatment",
   },
+  "the-silent-treatment": {
+    id: "the-silent-treatment",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 5,
+    title: "The Silent\nTreatment",
+    coverImage: images.episode5Scene,
+    heroImage: images.episode5HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-5.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy and Taylor",
+      rest: " had\na disagreement last night.",
+    },
+    contextHook: "Today, Taylor barely\nspeaks to him.",
+    discoveredPatterns: (
+      patternReveals["the-silent-treatment"]?.patterns ?? []
+    ).map((pattern) => pattern.title),
+    decision: {
+      question: "What would you say?",
+      subtext: "Taylor has barely spoken to Jimmy all day.",
+      prompt: "Choose what Jimmy says next.",
+      promptEmphasis: "next.",
+      options: [
+        {
+          id: "response-1",
+          text: "Okay… did I do something wrong?",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-a.mp4",
+          },
+        },
+        {
+          id: "response-2",
+          text: "I'm sorry I went out. I didn't mean to make you feel unimportant.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-b.mp4",
+          },
+        },
+        {
+          id: "response-3",
+          text: "Fine. If you don't want to talk, I won't either.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-c.mp4",
+          },
+        },
+        {
+          id: "response-4",
+          text: "I'm happy to talk if something's bothering you, but I'm not going to keep guessing.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-d.mp4",
+          },
+        },
+      ],
+    },
+    nextEpisodeId: "disappearing-act",
+  },
 };
 
 /**
@@ -235,13 +292,6 @@ export type EpisodeSummary = {
  * upcoming/locked without fabricating story content that doesn't exist.
  */
 const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "the-silent-treatment",
-    storyId: "dating",
-    episodeNumber: 5,
-    title: "The Silent Treatment",
-    patterns: [],
-  },
   {
     id: "disappearing-act",
     storyId: "dating",
