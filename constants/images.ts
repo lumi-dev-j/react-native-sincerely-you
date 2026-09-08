@@ -1,3 +1,4 @@
+import blameShifting from "@/assets/images/blame-shifting.png";
 import bottomCard from "@/assets/images/bottom-card.png";
 import boundaryTesting from "@/assets/images/boundary-testing.png";
 import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
@@ -14,6 +15,8 @@ import episode4HeroCard from "@/assets/images/episode-4-hero-card.png";
 import episode4Scene from "@/assets/images/episode-main-scene.png";
 import episode5HeroCard from "@/assets/images/episode-5-hero-card.png";
 import episode5Scene from "@/assets/images/episode-5-scene.png";
+import episode6HeroCard from "@/assets/images/episode-6-hero-card.png";
+import episode6Scene from "@/assets/images/episode-6-scene.png";
 import futureFaking from "@/assets/images/future-faking.png";
 import guiltTripping from "@/assets/images/guilt-tripping.png";
 import loveBombing from "@/assets/images/love-bombing.png";
@@ -46,6 +49,7 @@ export const images = {
   topCard,
   bottomCard,
   boundaryTesting,
+  blameShifting,
   paperGrain,
   storyDating01Scene,
   contextBackground,
@@ -61,6 +65,8 @@ export const images = {
   episode4Scene,
   episode5HeroCard,
   episode5Scene,
+  episode6HeroCard,
+  episode6Scene,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,

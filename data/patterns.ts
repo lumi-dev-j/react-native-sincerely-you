@@ -261,6 +261,54 @@ export const patternReveals: Record<string, PatternReveal> = {
     reminder:
       "Needing space is okay. Leaving someone to guess\nwhere they stand is different.",
   },
+  "disappearing-act": {
+    patterns: [
+      {
+        id: "blame-shifting",
+        label: "Pattern Discovered",
+        title: "Blame Shifting",
+        description:
+          "When you bring up something that bothered you, the conversation can shift toward what you supposedly did wrong instead. You may end up defending yourself or apologizing—while the original concern gets left behind.",
+        icon: { set: "material", name: "arrow-decision-outline" },
+        image: images.blameShifting,
+      },
+    ],
+    responses: [
+      {
+        id: "response-1",
+        reflection:
+          "You apologized, and the tension quickly faded. But notice what happened: the conversation moved away from what disappointed you and toward whether you were asking for too much.",
+      },
+      {
+        id: "response-2",
+        reflection:
+          "You defended yourself against how Taylor characterized you. But now the conversation is about whether you're controlling—not about the disappointment you originally brought up.",
+      },
+      {
+        id: "response-3",
+        reflection:
+          "You let the issue go, and the tension quickly faded. But what bothered you never actually got addressed.",
+      },
+      {
+        id: "response-4",
+        reflection:
+          "You clarified what you meant without getting pulled into defending yourself. By returning to how you felt, you kept the conversation focused on what you originally wanted to address.",
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Bringing up one concern and suddenly having to defend yourself",
+        "Being blamed for intentions you didn't express",
+        "Your original concern getting lost in the conversation",
+        "Apologizing mainly to restore the connection",
+        "Starting to stay quiet because speaking up feels like it creates conflict",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "You can hear their side without losing sight\nof what you wanted to address.",
+  },
 };
 
 /**
