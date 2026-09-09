@@ -309,6 +309,32 @@ export const patternReveals: Record<string, PatternReveal> = {
     reminder:
       "You can hear their side without losing sight\nof what you wanted to address.",
   },
+  "second-guessing": {
+    patterns: [
+      {
+        id: "gaslighting",
+        label: "Pattern 1",
+        title: "Gaslighting",
+        description:
+          "When someone repeatedly denies, dismisses, or rewrites your experiences, you may begin to question your own memory, perception, or judgment.",
+        icon: { set: "material", name: "help-circle-outline" },
+        image: images.gasLighting,
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Being repeatedly told something didn't happen the way you remember",
+        "Hearing \"I never said that\" about things you remember clearly",
+        "Having your feelings used as a reason why your memory is \"wrong\"",
+        "Leaving conversations confused about what actually happened",
+        "Becoming less confident in your own memory or judgment",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "Different memories happen. The warning sign is a pattern\nthat makes you stop trusting your own.",
+  },
 };
 
 /**

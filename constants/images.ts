@@ -17,7 +17,10 @@ import episode5HeroCard from "@/assets/images/episode-5-hero-card.png";
 import episode5Scene from "@/assets/images/episode-5-scene.png";
 import episode6HeroCard from "@/assets/images/episode-6-hero-card.png";
 import episode6Scene from "@/assets/images/episode-6-scene.png";
+import episode7HeroCard from "@/assets/images/episode-7-hero-card.png";
+import episode7Scene from "@/assets/images/episode-7-scene.png";
 import futureFaking from "@/assets/images/future-faking.png";
+import gasLighting from "@/assets/images/gas-lighting.png";
 import guiltTripping from "@/assets/images/guilt-tripping.png";
 import loveBombing from "@/assets/images/love-bombing.png";
 import maskingTape from "@/assets/images/masking-tape.png";
@@ -67,6 +70,8 @@ export const images = {
   episode5Scene,
   episode6HeroCard,
   episode6Scene,
+  episode7HeroCard,
+  episode7Scene,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,
@@ -80,6 +85,7 @@ export const images = {
   storyDetailTornPaperCard,
   loveBombing,
   futureFaking,
+  gasLighting,
   guiltTripping,
   patternCard,
   pushAndPull,

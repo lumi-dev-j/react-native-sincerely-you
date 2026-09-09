@@ -50,8 +50,15 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
   "disappearing-act": {
     nextEpisode: {
       episodeNumber: 7,
-      titleLine: "Walking on Eggshells",
-      description: "Jimmy starts choosing his words\ncarefully around Taylor.",
+      titleLine: "Are You Sure?",
+      description: "Jimmy brings up a comment that hurt him—\nbut Taylor remembers it differently.",
+    },
+  },
+  "second-guessing": {
+    nextEpisode: {
+      episodeNumber: 8,
+      titleLine: "Seeing It Clearly",
+      description: "Looking back, a clearer picture\nstarts to take shape.",
     },
   },
 };

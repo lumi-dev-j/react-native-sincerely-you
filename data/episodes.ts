@@ -323,7 +323,30 @@ export const episodes: Record<string, Episode> = {
         },
       ],
     },
-    nextEpisodeId: "walking-on-eggshells",
+    nextEpisodeId: "second-guessing",
+  },
+  "second-guessing": {
+    id: "second-guessing",
+    storyId: "dating",
+    category: "Second Guessing",
+    episodeNumber: 7,
+    title: "Are You Sure?",
+    coverImage: images.episode7Scene,
+    heroImage: images.episode7HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-7.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy",
+      rest: " has started noticing small comments\nfrom Taylor that leave him feeling diminished.",
+    },
+    contextHook:
+      "When he finally brings one up,\nTaylor remembers it very differently.",
+    contextHookEmphasis: "Taylor",
+    discoveredPatterns: (patternReveals["second-guessing"]?.patterns ?? []).map(
+      (pattern) => pattern.title
+    ),
+    nextEpisodeId: "seeing-it-clearly",
   },
 };
 
@@ -350,13 +373,6 @@ export type EpisodeSummary = {
  * upcoming/locked without fabricating story content that doesn't exist.
  */
 const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "walking-on-eggshells",
-    storyId: "dating",
-    episodeNumber: 7,
-    title: "Walking on Eggshells",
-    patterns: [],
-  },
   {
     id: "seeing-it-clearly",
     storyId: "dating",
