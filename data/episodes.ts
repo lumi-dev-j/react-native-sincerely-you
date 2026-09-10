@@ -210,6 +210,144 @@ export const episodes: Record<string, Episode> = {
     ),
     nextEpisodeId: "the-silent-treatment",
   },
+  "the-silent-treatment": {
+    id: "the-silent-treatment",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 5,
+    title: "The Quiet After",
+    coverImage: images.episode5Scene,
+    heroImage: images.episode5HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-5.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy and Taylor",
+      rest: " had\na disagreement last night.",
+    },
+    contextHook: "Today, Taylor barely\nspeaks to him.",
+    discoveredPatterns: (
+      patternReveals["the-silent-treatment"]?.patterns ?? []
+    ).map((pattern) => pattern.title),
+    decision: {
+      question: "What would you say?",
+      subtext: "Taylor has barely spoken to Jimmy all day.",
+      prompt: "Choose what Jimmy says next.",
+      promptEmphasis: "next.",
+      options: [
+        {
+          id: "response-1",
+          text: "Okay… did I do something wrong?",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-a.mp4",
+          },
+        },
+        {
+          id: "response-2",
+          text: "I'm sorry I went out. I didn't mean to make you feel unimportant.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-b.mp4",
+          },
+        },
+        {
+          id: "response-3",
+          text: "Fine. If you don't want to talk, I won't either.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-c.mp4",
+          },
+        },
+        {
+          id: "response-4",
+          text: "I'm happy to talk if something's bothering you, but I'm not going to keep guessing.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-5-d.mp4",
+          },
+        },
+      ],
+    },
+    nextEpisodeId: "disappearing-act",
+  },
+  "disappearing-act": {
+    id: "disappearing-act",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 6,
+    title: "Off Course",
+    coverImage: images.episode6Scene,
+    heroImage: images.episode6HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-6.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy",
+      rest: " has a big day\nahead of him.",
+    },
+    contextHook: "Taylor wants to be\npart of the moment.\n\nBut…",
+    contextHookEmphasis: "Taylor",
+    discoveredPatterns: (
+      patternReveals["disappearing-act"]?.patterns ?? []
+    ).map((pattern) => pattern.title),
+    decision: {
+      question: "What would you say?",
+      subtext: "Taylor wants to be part of Jimmy's big day.",
+      prompt: "Choose what Jimmy says next.",
+      promptEmphasis: "next.",
+      options: [
+        {
+          id: "response-1",
+          text: "Maybe you're right. I'm sorry.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-6-a.mp4",
+          },
+        },
+        {
+          id: "response-2",
+          text: "That's not fair. You're making me sound controlling.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-6-b.mp4",
+          },
+        },
+        {
+          id: "response-3",
+          text: "Forget it. It doesn't matter.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-6-c.mp4",
+          },
+        },
+        {
+          id: "response-4",
+          text: "I'm not asking for an immediate response. I was just disappointed.",
+          video: {
+            uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/reponses/episode-6-d.mp4",
+          },
+        },
+      ],
+    },
+    nextEpisodeId: "second-guessing",
+  },
+  "second-guessing": {
+    id: "second-guessing",
+    storyId: "dating",
+    category: "Second Guessing",
+    episodeNumber: 7,
+    title: "Are You Sure?",
+    coverImage: images.episode7Scene,
+    heroImage: images.episode7HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-7.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy",
+      rest: " has started noticing small comments\nfrom Taylor that leave him feeling diminished.",
+    },
+    contextHook:
+      "When he finally brings one up,\nTaylor remembers it very differently.",
+    contextHookEmphasis: "Taylor",
+    discoveredPatterns: (patternReveals["second-guessing"]?.patterns ?? []).map(
+      (pattern) => pattern.title
+    ),
+    nextEpisodeId: "seeing-it-clearly",
+  },
 };
 
 /**
@@ -235,27 +373,6 @@ export type EpisodeSummary = {
  * upcoming/locked without fabricating story content that doesn't exist.
  */
 const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "the-silent-treatment",
-    storyId: "dating",
-    episodeNumber: 5,
-    title: "The Silent Treatment",
-    patterns: [],
-  },
-  {
-    id: "disappearing-act",
-    storyId: "dating",
-    episodeNumber: 6,
-    title: "Disappearing Act",
-    patterns: [],
-  },
-  {
-    id: "walking-on-eggshells",
-    storyId: "dating",
-    episodeNumber: 7,
-    title: "Walking on Eggshells",
-    patterns: [],
-  },
   {
     id: "seeing-it-clearly",
     storyId: "dating",

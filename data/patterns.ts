@@ -213,6 +213,128 @@ export const patternReveals: Record<string, PatternReveal> = {
     },
     reminder: "Love shouldn't keep you guessing when the warmth will return.",
   },
+  "the-silent-treatment": {
+    patterns: [
+      {
+        id: "silent-treatment",
+        label: "Pattern Discovered",
+        title: "Silent Treatment",
+        description:
+          "When someone withdraws communication after conflict, you may be left wondering what you did wrong—or what you need to do to make things okay again.",
+        icon: { set: "material", name: "chat-outline" },
+        image: images.silentTreatment,
+      },
+    ],
+    responses: [
+      {
+        id: "response-1",
+        reflection:
+          "You looked for reassurance when Taylor became distant. It's natural to want clarity, but repeatedly trying to figure out what you did wrong can turn someone else's silence into your responsibility.",
+      },
+      {
+        id: "response-2",
+        reflection:
+          "You apologized to restore the connection, even though keeping your plans wasn't necessarily wrong. When warmth returns after an apology, it can teach you to take responsibility for the distance just to make things feel okay again.",
+      },
+      {
+        id: "response-3",
+        reflection:
+          "You protected yourself by withdrawing too. That may stop you from chasing for reassurance, but matching silence with silence can leave the real issue unresolved and create even more distance.",
+      },
+      {
+        id: "response-4",
+        reflection:
+          "You acknowledged the distance and left the door open to talk without taking responsibility for figuring out what Taylor wouldn't communicate. This gives her space while keeping communication a shared responsibility.",
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Silence that repeatedly follows disagreements",
+        "Not knowing when they'll speak to you again",
+        "Feeling pressure to apologize just to restore the connection",
+        "Replaying the conflict to figure out what you did wrong",
+        "Changing your behavior to avoid being shut out again",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "Needing space is okay. Leaving someone to guess\nwhere they stand is different.",
+  },
+  "disappearing-act": {
+    patterns: [
+      {
+        id: "blame-shifting",
+        label: "Pattern Discovered",
+        title: "Blame Shifting",
+        description:
+          "When you bring up something that bothered you, the conversation can shift toward what you supposedly did wrong instead. You may end up defending yourself or apologizing—while the original concern gets left behind.",
+        icon: { set: "material", name: "arrow-decision-outline" },
+        image: images.blameShifting,
+      },
+    ],
+    responses: [
+      {
+        id: "response-1",
+        reflection:
+          "You apologized, and the tension quickly faded. But notice what happened: the conversation moved away from what disappointed you and toward whether you were asking for too much.",
+      },
+      {
+        id: "response-2",
+        reflection:
+          "You defended yourself against how Taylor characterized you. But now the conversation is about whether you're controlling—not about the disappointment you originally brought up.",
+      },
+      {
+        id: "response-3",
+        reflection:
+          "You let the issue go, and the tension quickly faded. But what bothered you never actually got addressed.",
+      },
+      {
+        id: "response-4",
+        reflection:
+          "You clarified what you meant without getting pulled into defending yourself. By returning to how you felt, you kept the conversation focused on what you originally wanted to address.",
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Bringing up one concern and suddenly having to defend yourself",
+        "Being blamed for intentions you didn't express",
+        "Your original concern getting lost in the conversation",
+        "Apologizing mainly to restore the connection",
+        "Starting to stay quiet because speaking up feels like it creates conflict",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "You can hear their side without losing sight\nof what you wanted to address.",
+  },
+  "second-guessing": {
+    patterns: [
+      {
+        id: "gaslighting",
+        label: "Pattern 1",
+        title: "Gaslighting",
+        description:
+          "When someone repeatedly denies, dismisses, or rewrites your experiences, you may begin to question your own memory, perception, or judgment.",
+        icon: { set: "material", name: "help-circle-outline" },
+        image: images.gasLighting,
+      },
+    ],
+    watchFor: {
+      label: "What to watch for",
+      items: [
+        "Being repeatedly told something didn't happen the way you remember",
+        "Hearing \"I never said that\" about things you remember clearly",
+        "Having your feelings used as a reason why your memory is \"wrong\"",
+        "Leaving conversations confused about what actually happened",
+        "Becoming less confident in your own memory or judgment",
+      ],
+      icon: { set: "feather", name: "eye" },
+    },
+    reminder:
+      "Different memories happen. The warning sign is a pattern\nthat makes you stop trusting your own.",
+  },
 };
 
 /**

@@ -36,8 +36,29 @@ export const episodeCompletions: Record<string, EpisodeCompletion> = {
   "mixed-signals": {
     nextEpisode: {
       episodeNumber: 5,
-      titleLine: "The Silent Treatment",
+      titleLine: "The Quiet After",
       description: "Taylor goes quiet, and Jimmy\nis left guessing why.",
+    },
+  },
+  "the-silent-treatment": {
+    nextEpisode: {
+      episodeNumber: 6,
+      titleLine: "Off Course",
+      description: "Jimmy brings up something that\nbothered him—but somehow ends up apologizing.",
+    },
+  },
+  "disappearing-act": {
+    nextEpisode: {
+      episodeNumber: 7,
+      titleLine: "Are You Sure?",
+      description: "Jimmy brings up a comment that hurt him—\nbut Taylor remembers it differently.",
+    },
+  },
+  "second-guessing": {
+    nextEpisode: {
+      episodeNumber: 8,
+      titleLine: "Seeing It Clearly",
+      description: "Looking back, a clearer picture\nstarts to take shape.",
     },
   },
 };

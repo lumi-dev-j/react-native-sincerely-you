@@ -1,3 +1,4 @@
+import blameShifting from "@/assets/images/blame-shifting.png";
 import bottomCard from "@/assets/images/bottom-card.png";
 import boundaryTesting from "@/assets/images/boundary-testing.png";
 import completeEpisodeBackground from "@/assets/images/complete-episode-background.png";
@@ -12,7 +13,14 @@ import episode3HeroCard from "@/assets/images/episode-3-hero-card.png";
 import episode3Scene from "@/assets/images/episode-3-scene.png";
 import episode4HeroCard from "@/assets/images/episode-4-hero-card.png";
 import episode4Scene from "@/assets/images/episode-main-scene.png";
+import episode5HeroCard from "@/assets/images/episode-5-hero-card.png";
+import episode5Scene from "@/assets/images/episode-5-scene.png";
+import episode6HeroCard from "@/assets/images/episode-6-hero-card.png";
+import episode6Scene from "@/assets/images/episode-6-scene.png";
+import episode7HeroCard from "@/assets/images/episode-7-hero-card.png";
+import episode7Scene from "@/assets/images/episode-7-scene.png";
 import futureFaking from "@/assets/images/future-faking.png";
+import gasLighting from "@/assets/images/gas-lighting.png";
 import guiltTripping from "@/assets/images/guilt-tripping.png";
 import loveBombing from "@/assets/images/love-bombing.png";
 import maskingTape from "@/assets/images/masking-tape.png";
@@ -24,6 +32,7 @@ import pinkReminder from "@/assets/images/pink-reminder.png";
 import pushAndPull from "@/assets/images/push-and-pull.png";
 import responseCard from "@/assets/images/reponse-card.png";
 import responsePageBackground from "@/assets/images/response-page-background.png";
+import silentTreatment from "@/assets/images/silent-treatment.png";
 import storyDating01Scene from "@/assets/images/story-dating-01-scene.png";
 import storyDetailBackground from "@/assets/images/story-detail-background.png";
 import storyDetailBottomHandwritten from "@/assets/images/story-detail-bottom-handwritten.png";
@@ -43,6 +52,7 @@ export const images = {
   topCard,
   bottomCard,
   boundaryTesting,
+  blameShifting,
   paperGrain,
   storyDating01Scene,
   contextBackground,
@@ -56,6 +66,12 @@ export const images = {
   episode3Scene,
   episode4HeroCard,
   episode4Scene,
+  episode5HeroCard,
+  episode5Scene,
+  episode6HeroCard,
+  episode6Scene,
+  episode7HeroCard,
+  episode7Scene,
   videoPageBackground,
   videoPageWhiteFrame,
   videoPageNoteClip,
@@ -69,9 +85,11 @@ export const images = {
   storyDetailTornPaperCard,
   loveBombing,
   futureFaking,
+  gasLighting,
   guiltTripping,
   patternCard,
   pushAndPull,
+  silentTreatment,
   tornPatternCard,
   tornPatternCardParchment,
   maskingTape,
