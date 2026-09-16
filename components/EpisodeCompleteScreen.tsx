@@ -81,11 +81,13 @@ export function EpisodeCompleteScreen({
                 className="text-label text-burgundy"
                 style={{ letterSpacing: 0.6 }}
               >
-                PATTERNS DISCOVERED
+                {patternsDiscovered.length > 0
+                  ? "PATTERNS DISCOVERED"
+                  : "NO NEW PATTERN"}
               </Text>
-              <View className="flex-row flex-wrap gap-2 pt-3">
-                {patternsDiscovered.length > 0 ? (
-                  patternsDiscovered.map((pattern) => (
+              {patternsDiscovered.length > 0 ? (
+                <View className="flex-row flex-wrap gap-2 pt-3">
+                  {patternsDiscovered.map((pattern) => (
                     <View
                       key={pattern}
                       className="rounded-lg bg-rose-dust/40 px-4 py-2.5"
@@ -94,19 +96,17 @@ export function EpisodeCompleteScreen({
                         {pattern}
                       </Text>
                     </View>
-                  ))
-                ) : (
-                  <View className="rounded-lg bg-rose-dust/40 px-4 py-2.5">
-                    <Text className="font-sans-medium text-body-md text-burgundy-dark">
-                      No New Pattern
-                    </Text>
-                  </View>
-                )}
-              </View>
-              {noPatternNote && (
-                <Text className="pt-3 text-body-sm text-ink-muted">
-                  {noPatternNote}
-                </Text>
+                  ))}
+                </View>
+              ) : (
+                noPatternNote && (
+                  <Text
+                    className="pt-3 text-ink-muted"
+                    style={{ fontSize: 12, lineHeight: 18 }}
+                  >
+                    {noPatternNote}
+                  </Text>
+                )
               )}
             </View>
 
@@ -131,7 +131,7 @@ export function EpisodeCompleteScreen({
                     {nextEpisode.thumbnail ? (
                       <Image
                         source={nextEpisode.thumbnail}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top"
                       />
                     ) : (
                       <View className="h-full w-full items-center justify-center border border-dashed border-border">
@@ -193,30 +193,35 @@ export function EpisodeCompleteScreen({
                     {storyComplete.body.map((paragraph, index) => (
                       <Text
                         key={index}
-                        className="text-body-sm text-ink-muted"
+                        className="text-ink"
+                        style={{ fontSize: 12, lineHeight: 18 }}
                       >
-                        {paragraph}
+                        {renderEmphasis(paragraph)}
                       </Text>
                     ))}
                   </View>
-                  <View className="flex-row items-center gap-2 pt-1.5">
-                    <Feather name="heart" size={13} color={colors.burgundy} />
-                    <Text className="flex-1 text-body-sm text-burgundy-dark">
-                      {storyComplete.closingLine}
+                </View>
+
+                <View className="mt-5 flex-row items-start gap-3 rounded-2xl bg-rose-dust/20 p-4">
+                  <Feather
+                    name="heart"
+                    size={20}
+                    color={colors.burgundy}
+                    style={{ marginTop: 2 }}
+                  />
+                  <View className="w-px self-stretch bg-burgundy/20" />
+                  <View className="flex-1 gap-1">
+                    <Text className="text-h2 text-burgundy-dark">
+                      {storyComplete.closingCard.title}
+                    </Text>
+                    <Text
+                      className="text-ink-muted"
+                      style={{ fontSize: 12, lineHeight: 18 }}
+                    >
+                      {storyComplete.closingCard.description}
                     </Text>
                   </View>
                 </View>
-
-                <Pressable
-                  className="mt-5 flex-row items-center justify-center gap-2.5 rounded-2xl bg-burgundy-dark px-6 py-4"
-                  style={styles.buttonShadow}
-                  onPress={onBackToHome}
-                >
-                  <Text className="text-button text-paper-light">
-                    {storyComplete.buttonLabel}
-                  </Text>
-                  <Feather name="arrow-right" size={16} color={colors.paperLight} />
-                </Pressable>
               </View>
             )}
 
@@ -235,6 +240,21 @@ export function EpisodeCompleteScreen({
         </View>
       </SafeAreaView>
     </View>
+  );
+}
+
+// Splits a paragraph on `**bold**` markers and renders the wrapped
+// portions as bold burgundy, so a data file can highlight a phrase inline
+// without the component needing a richer (array-of-segments) paragraph type.
+function renderEmphasis(paragraph: string) {
+  return paragraph.split(/\*\*(.+?)\*\*/g).map((chunk, index) =>
+    index % 2 === 1 ? (
+      <Text key={index} className="font-sans-medium text-burgundy-dark">
+        {chunk}
+      </Text>
+    ) : (
+      <Text key={index}>{chunk}</Text>
+    )
   );
 }
 
