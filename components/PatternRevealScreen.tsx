@@ -72,6 +72,18 @@ export function PatternRevealScreen({
           contentContainerClassName="px-5 pb-5 pt-4"
           showsVerticalScrollIndicator={false}
         >
+          {reveal.recap && (
+            <>
+              <PatternRow
+                label={reveal.recap.label}
+                title={reveal.recap.title}
+                description={reveal.recap.description}
+                icon={reveal.recap.icon}
+              />
+              <Divider />
+            </>
+          )}
+
           {reveal.patterns.map((pattern) => (
             <Fragment key={pattern.title}>
               <PatternRow

@@ -39,7 +39,22 @@ export type ResponseReflection = {
   reflection: string;
 };
 
+export type PatternRecap = {
+  /** Small uppercase heading, e.g. "What You Learned". */
+  label: string;
+  title: string;
+  description: string;
+  icon: PatternIcon;
+};
+
 export type PatternReveal = {
+  /**
+   * Intro block shown before any patterns — used instead of a `patterns`
+   * entry when an episode introduces no new pattern (e.g. a story-recap
+   * episode), so it doesn't get surfaced as a "discovered pattern" on the
+   * home/Patterns screens (those only read `patterns`).
+   */
+  recap?: PatternRecap;
   patterns: PatternInsight[];
   /**
    * When set, shows a "Your Response" section for whichever option the user
@@ -334,6 +349,30 @@ export const patternReveals: Record<string, PatternReveal> = {
     },
     reminder:
       "Different memories happen. The warning sign is a pattern\nthat makes you stop trusting your own.",
+  },
+  "seeing-it-clearly": {
+    recap: {
+      label: "What You Learned",
+      title: "Seeing It Clearly",
+      description:
+        "No new pattern is introduced here. Sometimes the most important realization comes from stepping back and noticing how different moments connect.\n\nOne difficult interaction may not define a relationship. But when confusion, guilt, self-doubt, or fear of speaking up keep returning, it can help to look at the relationship as a whole.",
+      icon: { set: "feather", name: "compass" },
+    },
+    patterns: [],
+    watchFor: {
+      label: "What to reflect on",
+      items: [
+        "Can I bring up something that hurt me without being dismissed, punished, or made to regret bringing it up?",
+        "Can we both take responsibility for our behavior without immediately turning the conversation back on the other person?",
+        "Do I trust my own feelings, memories, and judgment—or have I started regularly second-guessing myself?",
+        "Are my boundaries, needs, and relationships outside of this relationship respected?",
+        "When we talk about a problem, does anything actually change over time?",
+        "Do I still feel like myself in this relationship?",
+      ],
+      icon: { set: "feather", name: "help-circle" },
+    },
+    reminder:
+      "You don't have to ignore what you've learned just because you still love them.",
   },
 };
 

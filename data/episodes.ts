@@ -348,6 +348,26 @@ export const episodes: Record<string, Episode> = {
     ),
     nextEpisodeId: "seeing-it-clearly",
   },
+  "seeing-it-clearly": {
+    id: "seeing-it-clearly",
+    storyId: "dating",
+    category: "Dating",
+    episodeNumber: 8,
+    title: "Seeing It Clearly",
+    coverImage: images.episode8Scene,
+    heroImage: images.episode8HeroCard,
+    video: {
+      uri: "https://pub-c2198be740204535b80c982140941694.r2.dev/dating/episode-8.mp4",
+    },
+    contextIntro: {
+      emphasis: "Jimmy",
+      rest: " hasn't felt quite like\nhimself lately.",
+    },
+    contextHook:
+      "After everything that's happened,\nhe knows there's something\nhe can't keep ignoring.",
+    // Final episode of the story — no new pattern is introduced here.
+    discoveredPatterns: [],
+  },
 };
 
 /**
@@ -372,15 +392,7 @@ export type EpisodeSummary = {
  * yet — roster info only, so the Story Detail screen can list them as
  * upcoming/locked without fabricating story content that doesn't exist.
  */
-const upcomingEpisodes: EpisodeSummary[] = [
-  {
-    id: "seeing-it-clearly",
-    storyId: "dating",
-    episodeNumber: 8,
-    title: "Seeing It Clearly",
-    patterns: [],
-  },
-];
+const upcomingEpisodes: EpisodeSummary[] = [];
 
 /** Every episode summary for a story, in episode-number order. */
 export function getStoryEpisodes(storyId: string): EpisodeSummary[] {
