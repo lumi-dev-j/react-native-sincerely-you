@@ -139,7 +139,7 @@ export function PatternFlipCard({
               className="text-label text-burgundy"
               style={{ fontSize: 10, lineHeight: 13, letterSpacing: 0.6 }}
             >
-              {pattern.label.toUpperCase()}
+              PATTERN DISCOVERED
             </Text>
             <Text className="text-center text-h2 text-burgundy-dark">
               {splitTitle(pattern.title)}
