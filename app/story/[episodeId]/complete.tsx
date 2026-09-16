@@ -27,7 +27,9 @@ export default function EpisodeComplete() {
       <EpisodeCompleteScreen
         episode={episode}
         patternsDiscovered={episode.discoveredPatterns}
+        noPatternNote={completion.noPatternNote}
         nextEpisode={completion.nextEpisode}
+        storyComplete={completion.storyComplete}
         onBack={() =>
           router.canGoBack()
             ? router.back()

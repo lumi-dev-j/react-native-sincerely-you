@@ -12,7 +12,11 @@ import { images } from "@/constants/images";
 type EpisodeCompleteScreenProps = {
   episode: Episode;
   patternsDiscovered: string[];
-  nextEpisode: EpisodeCompletion["nextEpisode"];
+  /** Shown instead of pattern pills when patternsDiscovered is empty. */
+  noPatternNote?: string;
+  nextEpisode?: EpisodeCompletion["nextEpisode"];
+  /** Set on the final episode instead of nextEpisode. */
+  storyComplete?: EpisodeCompletion["storyComplete"];
   onBack?: () => void;
   onContinue?: () => void;
   onBackToHome?: () => void;
@@ -21,7 +25,9 @@ type EpisodeCompleteScreenProps = {
 export function EpisodeCompleteScreen({
   episode,
   patternsDiscovered,
+  noPatternNote,
   nextEpisode,
+  storyComplete,
   onBack,
   onContinue,
   onBackToHome,
@@ -78,77 +84,141 @@ export function EpisodeCompleteScreen({
                 PATTERNS DISCOVERED
               </Text>
               <View className="flex-row flex-wrap gap-2 pt-3">
-                {patternsDiscovered.map((pattern) => (
-                  <View
-                    key={pattern}
-                    className="rounded-lg bg-rose-dust/40 px-4 py-2.5"
-                  >
+                {patternsDiscovered.length > 0 ? (
+                  patternsDiscovered.map((pattern) => (
+                    <View
+                      key={pattern}
+                      className="rounded-lg bg-rose-dust/40 px-4 py-2.5"
+                    >
+                      <Text className="font-sans-medium text-body-md text-burgundy-dark">
+                        {pattern}
+                      </Text>
+                    </View>
+                  ))
+                ) : (
+                  <View className="rounded-lg bg-rose-dust/40 px-4 py-2.5">
                     <Text className="font-sans-medium text-body-md text-burgundy-dark">
-                      {pattern}
+                      No New Pattern
                     </Text>
                   </View>
-                ))}
+                )}
               </View>
+              {noPatternNote && (
+                <Text className="pt-3 text-body-sm text-ink-muted">
+                  {noPatternNote}
+                </Text>
+              )}
             </View>
 
             {/* Next episode */}
-            <View
-              className="mt-4 rounded-3xl bg-paper-light p-5"
-              style={styles.cardShadow}
-            >
-              <Text
-                className="text-label text-burgundy"
-                style={{ letterSpacing: 0.6 }}
+            {nextEpisode && (
+              <View
+                className="mt-4 rounded-3xl bg-paper-light p-5"
+                style={styles.cardShadow}
               >
-                NEXT EPISODE
-              </Text>
-
-              <View className="flex-row gap-4 pt-3">
-                <View
-                  className="w-[42%] overflow-hidden rounded-xl bg-paper"
-                  style={{ aspectRatio: 1.2 }}
+                <Text
+                  className="text-label text-burgundy"
+                  style={{ letterSpacing: 0.6 }}
                 >
-                  {nextEpisode.thumbnail ? (
-                    <Image
-                      source={nextEpisode.thumbnail}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <View className="h-full w-full items-center justify-center border border-dashed border-border">
-                      <Feather name="image" size={22} color={colors.inkMuted} />
-                    </View>
-                  )}
+                  NEXT EPISODE
+                </Text>
+
+                <View className="flex-row gap-4 pt-3">
+                  <View
+                    className="w-[42%] overflow-hidden rounded-xl bg-paper"
+                    style={{ aspectRatio: 1.2 }}
+                  >
+                    {nextEpisode.thumbnail ? (
+                      <Image
+                        source={nextEpisode.thumbnail}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <View className="h-full w-full items-center justify-center border border-dashed border-border">
+                        <Feather name="image" size={22} color={colors.inkMuted} />
+                      </View>
+                    )}
+                  </View>
+
+                  <View className="flex-1 gap-1.5 pt-0.5">
+                    <Text
+                      className="text-label text-burgundy"
+                      style={{ letterSpacing: 0.6 }}
+                    >
+                      EPISODE {String(nextEpisode.episodeNumber).padStart(2, "0")}
+                    </Text>
+                    <Text className="text-h2 text-burgundy-dark">
+                      {nextEpisode.titleLine}
+                    </Text>
+                    <View className="h-[2px] w-8 rounded-full bg-burgundy/70" />
+                    <Text className="pt-1 text-body-sm text-ink-muted">
+                      {nextEpisode.description}
+                    </Text>
+                  </View>
                 </View>
 
-                <View className="flex-1 gap-1.5 pt-0.5">
-                  <Text
-                    className="text-label text-burgundy"
-                    style={{ letterSpacing: 0.6 }}
-                  >
-                    EPISODE {String(nextEpisode.episodeNumber).padStart(2, "0")}
+                <Pressable
+                  className="mt-5 flex-row items-center justify-center gap-2.5 rounded-2xl bg-burgundy-dark px-6 py-4"
+                  style={styles.buttonShadow}
+                  onPress={onContinue}
+                >
+                  <Text className="text-button text-paper-light">
+                    Continue to Episode{" "}
+                    {String(nextEpisode.episodeNumber).padStart(2, "0")}
                   </Text>
+                  <Feather name="arrow-right" size={16} color={colors.paperLight} />
+                </Pressable>
+              </View>
+            )}
+
+            {/* Story complete */}
+            {storyComplete && (
+              <View
+                className="mt-4 rounded-3xl bg-paper-light p-5"
+                style={styles.cardShadow}
+              >
+                <Text
+                  className="text-label text-burgundy"
+                  style={{ letterSpacing: 0.6 }}
+                >
+                  STORY COMPLETE
+                </Text>
+
+                <View className="gap-1.5 pt-3">
                   <Text className="text-h2 text-burgundy-dark">
-                    {nextEpisode.titleLine}
+                    {storyComplete.title}
                   </Text>
                   <View className="h-[2px] w-8 rounded-full bg-burgundy/70" />
-                  <Text className="pt-1 text-body-sm text-ink-muted">
-                    {nextEpisode.description}
-                  </Text>
+                  <View className="gap-2 pt-1.5">
+                    {storyComplete.body.map((paragraph, index) => (
+                      <Text
+                        key={index}
+                        className="text-body-sm text-ink-muted"
+                      >
+                        {paragraph}
+                      </Text>
+                    ))}
+                  </View>
+                  <View className="flex-row items-center gap-2 pt-1.5">
+                    <Feather name="heart" size={13} color={colors.burgundy} />
+                    <Text className="flex-1 text-body-sm text-burgundy-dark">
+                      {storyComplete.closingLine}
+                    </Text>
+                  </View>
                 </View>
-              </View>
 
-              <Pressable
-                className="mt-5 flex-row items-center justify-center gap-2.5 rounded-2xl bg-burgundy-dark px-6 py-4"
-                style={styles.buttonShadow}
-                onPress={onContinue}
-              >
-                <Text className="text-button text-paper-light">
-                  Continue to Episode{" "}
-                  {String(nextEpisode.episodeNumber).padStart(2, "0")}
-                </Text>
-                <Feather name="arrow-right" size={16} color={colors.paperLight} />
-              </Pressable>
-            </View>
+                <Pressable
+                  className="mt-5 flex-row items-center justify-center gap-2.5 rounded-2xl bg-burgundy-dark px-6 py-4"
+                  style={styles.buttonShadow}
+                  onPress={onBackToHome}
+                >
+                  <Text className="text-button text-paper-light">
+                    {storyComplete.buttonLabel}
+                  </Text>
+                  <Feather name="arrow-right" size={16} color={colors.paperLight} />
+                </Pressable>
+              </View>
+            )}
 
             {/* Back to home */}
             <Pressable
